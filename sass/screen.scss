@@ -1,0 +1,118 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+ @import "compass/reset";
+ @import "compass";
+ @import "compass/css3/transform";
+ @import url(http://fonts.googleapis.com/css?family=Raleway);
+
+ $mainColor: #c0392b;
+
+ .no-padding {
+ 	padding: 0;
+ }
+
+ body, html {
+ 	height: 100%;
+ }
+
+ body { 
+ 	background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent; 
+ 	-webkit-background-size: cover;
+ 	-moz-background-size: cover;
+ 	-o-background-size: cover;
+ 	background-size: cover;
+ 	font-family: 'Raleway', sans-serif;
+ 	font-weight: 400;
+ 	font-size: 15px;
+ }
+
+ .navbar {
+ 	background: $mainColor;
+
+ 	.navbar-brand {
+ 		margin-top: -15px;
+ 	}
+ }
+
+ .homepage-photo-container {
+ 	height: 100%;
+ 	margin: 0 auto;
+ 	width:100%;
+
+ 	.photo-homepage {
+ 		background: none;
+ 		height: 100%;
+
+ 		.container-fluid {
+ 			height: 100%;
+
+ 			.row {
+ 				height: 50%;
+ 				width: 100%;
+
+ 				.col-xs-6 {
+ 					padding: 15% 15%;
+
+ 					span.time {
+ 						text-align:center;
+ 						font-size: 1.2em;
+ 						color: white;
+ 						@include text-shadow(2px 1px 1px black);
+ 					}
+ 					span.time.two-hours {
+ 						margin-left: 15px;
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+ }
+
+ .pieContainer {
+ 	height: 100px;
+ 	margin-bottom: 15px;
+
+ 	.pieBackground {
+ 		background-color: $mainColor;
+ 		position: absolute;
+ 		width: 100px;
+ 		height: 100px;
+ 		@include border-radius(50px);
+ 	}
+
+ 	.pieBackground.full {
+ 		background-color: white;
+ 	}
+
+ 	.pie {
+ 		position: absolute;
+ 		width: 100px;
+ 		height: 100px;
+ 		background-color: white;
+ 		@include border-radius(50px);
+ 		clip: rect(0px, 50px, 100px, 0px);
+ 	}
+
+ 	.hold {
+ 		position: absolute;
+ 		width: 100px;
+ 		height: 100px;
+ 		@include border-radius(50px);
+ 		clip: rect(0px, 100px, 100px, 50px);
+ 	}
+
+ 	#thirty-minutes .pie {
+ 		@include transform(rotate(15deg));
+ 	}
+
+ 	#two-hours .pie {
+ 		@include transform(rotate(60deg));
+ 	}
+
+ 	#six-hours .pie {
+ 		@include transform(rotate(180deg));
+ 	}
+ }
