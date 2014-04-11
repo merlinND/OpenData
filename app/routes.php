@@ -28,36 +28,41 @@ Route::get('/home', function()
 |--------------------------------------------------------------------------
 */
 // TODO: move whole api to subdomain api.<domain>.<tld> ?
-define('API_PREFIX', '/api');
 
 // Patterns
 Route::pattern('place_id', '[0-9]+');
 
-//Route::model('place_id', 'Place');
-Route::get(API_PREFIX.'/place/{place_id}', function($place_id) // (Place $place)
-{
-	return "TODO: retourner l'endroit avec id $place_id.";
-});
+Route::group(array('prefix' => '/api'), function() {
 
-Route::get(API_PREFIX.'/place/', function()
-{
-	$supported = array('from', 'time', 'distance', 'except');
+	Route::get('/hello', 'ApiController@helloApi');
 
-	// Aucun paramètre => lieu aléatoire
-	if(count(Input::all()) < 1)
-		return "TODO: retourner un endroit aléatoire.";
+	//Route::model('place_id', 'Place');
+	//Route::get('/place/{place_id}', function(Place $place) {
+	Route::get('/place/{place_id}', function($place_id) {
+		return "TODO: retourner l'endroit avec id $place_id.";
+	});
 
-	// Aucun paramètre invalide => 404
-	$valid = false;
-	foreach ($supported as $key) {
-		if (Input::has($key))
-			$valid = true;
-	}
-	if (!$valid) {
-		App::abort(404);
-		return Response::view('errors.missing', array(), 404);
-	}
+	Route::get('/place/', function() {
+		// No parameter => random place
+		if(count(Input::all()) < 1)
+			return ApiController::getRandomPlace();
 
-	// Paramètre(s) => recherche filtrée
-	return var_dump(Input::all());
+		// No valid parameter => 404 error
+		$valid = false;
+		foreach (ApiController::$supportedParameters as $key) {
+			if (Input::has($key) && strlen(Input::get($key)) > 0) {
+				$valid = true;
+			}
+		}
+		// The <from> parameter is required
+		if (!$valid || !Input::has('from')) {
+			App::abort(404);
+			return Response::view('errors.missing', array(), 404);
+		}
+
+		$coords = json_decode(Input::get('from'));
+
+		// Paramètre(s) => recherche filtrée
+		return ApiController::getPlaces($coords, Input::all());
+	});
 });
