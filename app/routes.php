@@ -34,8 +34,6 @@ Route::pattern('place_id', '[0-9]+');
 
 Route::group(array('prefix' => '/api'), function() {
 
-	Route::get('/hello', 'ApiController@helloApi');
-
 	//Route::model('place_id', 'Place');
 	//Route::get('/place/{place_id}', function(Place $place) {
 	Route::get('/place/{place_id}', function($place_id) {
@@ -55,6 +53,7 @@ Route::group(array('prefix' => '/api'), function() {
 				$valid = true;
 			}
 		}
+
 		// The <from> parameter is required
 		if (count($params) < 1 || !Input::has('from')) {
 			App::abort(404);
@@ -63,6 +62,9 @@ Route::group(array('prefix' => '/api'), function() {
 
 		// Paramètre(s) => recherche filtrée
 		$coords = json_decode(Input::get('from'));
-		return ApiController::getPlaces($coords, $params);
+
+		$results = ApiController::getPlaces($coords, $params);
+
+		return $results->flatten();
 	});
 });
