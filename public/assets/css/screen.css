@@ -1,0 +1,207 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+/* line 17, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 13, ../../../sass/screen.scss */
+.no-padding {
+  padding: 0;
+}
+
+/* line 17, ../../../sass/screen.scss */
+body, html {
+  height: 100%;
+}
+
+/* line 21, ../../../sass/screen.scss */
+body {
+  background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+/* line 32, ../../../sass/screen.scss */
+.navbar {
+  background: #c0392b;
+}
+/* line 35, ../../../sass/screen.scss */
+.navbar .navbar-brand {
+  margin-top: -15px;
+}
+
+/* line 40, ../../../sass/screen.scss */
+.homepage-photo-container {
+  height: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+/* line 45, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage {
+  background: none;
+  height: 100%;
+}
+/* line 49, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid {
+  height: 100%;
+}
+/* line 52, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid .row {
+  height: 50%;
+  width: 100%;
+}
+/* line 56, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid .row .col-xs-6 {
+  padding: 15% 15%;
+}
+/* line 59, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid .row .col-xs-6 span.time {
+  text-align: center;
+  font-size: 1.2em;
+  color: white;
+  text-shadow: 2px 1px 1px black;
+}
+/* line 65, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid .row .col-xs-6 span.time.two-hours {
+  margin-left: 15px;
+}
+
+/* line 74, ../../../sass/screen.scss */
+.pieContainer {
+  height: 100px;
+  margin-bottom: 15px;
+}
+/* line 78, ../../../sass/screen.scss */
+.pieContainer .pieBackground {
+  background-color: #c0392b;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+}
+/* line 86, ../../../sass/screen.scss */
+.pieContainer .pieBackground.full {
+  background-color: white;
+}
+/* line 90, ../../../sass/screen.scss */
+.pieContainer .pie {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+  clip: rect(0px, 50px, 100px, 0px);
+}
+/* line 99, ../../../sass/screen.scss */
+.pieContainer .hold {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+  clip: rect(0px, 100px, 100px, 50px);
+}
+/* line 107, ../../../sass/screen.scss */
+.pieContainer #thirty-minutes .pie {
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+/* line 111, ../../../sass/screen.scss */
+.pieContainer #two-hours .pie {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+/* line 115, ../../../sass/screen.scss */
+.pieContainer #six-hours .pie {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
