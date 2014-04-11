@@ -9,3 +9,5 @@ composer.lock
 
 # Mac shit
 .DS_Store
+
+app/config/database.php

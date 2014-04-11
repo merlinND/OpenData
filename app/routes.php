@@ -60,21 +60,21 @@ Route::group(array('prefix' => '/api'), function() {
 			return ApiController::getRandomPlace();
 
 		// No valid parameter => 404 error
-		$valid = false;
+		$params = array();
 		foreach (ApiController::$supportedParameters as $key) {
 			if (Input::has($key) && strlen(Input::get($key)) > 0) {
+				$params[$key] = Input::get($key);
 				$valid = true;
 			}
 		}
 		// The <from> parameter is required
-		if (!$valid || !Input::has('from')) {
+		if (count($params) < 1 || !Input::has('from')) {
 			App::abort(404);
 			return Response::view('errors.missing', array(), 404);
 		}
 
-		$coords = json_decode(Input::get('from'));
-
 		// Paramètre(s) => recherche filtrée
-		return ApiController::getPlaces($coords, Input::all());
+		$coords = json_decode(Input::get('from'));
+		return ApiController::getPlaces($coords, $params);
 	});
 });

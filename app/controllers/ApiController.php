@@ -28,6 +28,7 @@ class ApiController extends Controller {
 		// TODO
 		$places = array();
 		$places[] = array(
+			'id' => 1,
 			'name' => 'TODO',
 			'position' => array('lat' => 0, 'long' => 0)
 		);

@@ -11,7 +11,10 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		// $this->call('UserTableSeeder');
+		DB::table('places')->delete();
+
+		$this->call('TypeTableSeeder');
+		$this->call('OpenStreetMapSeeder');
 	}
 
 }
