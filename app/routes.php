@@ -38,23 +38,26 @@ Route::group(array('prefix' => '/api'), function() {
 	});
 
 	Route::get('/place/', function() {
-		// Aucun paramètre => lieu aléatoire
+		// No parameter => random place
 		if(count(Input::all()) < 1)
 			return ApiController::getRandomPlace();
 
-		// Aucun paramètre invalide => 404
+		// No valid parameter => 404 error
 		$valid = false;
 		foreach (ApiController::$supportedParameters as $key) {
 			if (Input::has($key) && strlen(Input::get($key)) > 0) {
 				$valid = true;
 			}
 		}
-		if (!$valid) {
+		// The <from> parameter is required
+		if (!$valid || !Input::has('from')) {
 			App::abort(404);
 			return Response::view('errors.missing', array(), 404);
 		}
 
+		$coords = json_decode(Input::get('from'));
+
 		// Paramètre(s) => recherche filtrée
-		return var_dump(Input::all());
+		return ApiController::getPlaces($coords, Input::all());
 	});
 });
