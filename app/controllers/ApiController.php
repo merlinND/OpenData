@@ -16,7 +16,7 @@ class ApiController extends Controller {
 	}
 
 	public static function getRandomPlace() {
-		return "TODO: retourner un endroit aléatoire.";
+		return Place::all()->random();
 	}
 
 	/**
