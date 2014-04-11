@@ -12,5 +12,5 @@
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->
 		</head>
-		<body>
+		<body class="homepage">
 			<div class="homepage-photo-container">

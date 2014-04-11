@@ -6,6 +6,8 @@
  @import "compass/reset";
  @import "compass";
  @import "compass/css3/transform";
+ @import 'compass/css3/filter';
+
  @import url(http://fonts.googleapis.com/css?family=Raleway);
 
  $mainColor: #c0392b;
@@ -16,17 +18,17 @@
 
  body, html {
  	height: 100%;
+ 	font-family: 'Raleway', sans-serif;
+ 	font-weight: 400;
+ 	font-size: 15px;
  }
 
- body { 
+ body.homepage { 
  	background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent; 
  	-webkit-background-size: cover;
  	-moz-background-size: cover;
  	-o-background-size: cover;
  	background-size: cover;
- 	font-family: 'Raleway', sans-serif;
- 	font-weight: 400;
- 	font-size: 15px;
  }
 
  .navbar {
@@ -49,12 +51,23 @@
  		.container-fluid {
  			height: 100%;
 
+ 			.title {
+ 				height: 20%;
+
+ 				h1 {
+ 					padding-top: 10%;
+ 					font-size: 4em;
+ 					text-align: center;
+ 				}
+ 			}
+
  			.row {
- 				height: 50%;
+ 				height: 40%;
  				width: 100%;
 
  				.col-xs-6 {
  					padding: 15% 15%;
+ 					cursor: pointer;
 
  					span.time {
  						text-align:center;
@@ -69,50 +82,66 @@
  			}
  		}
  	}
- }
 
- .pieContainer {
- 	height: 100px;
- 	margin-bottom: 15px;
-
- 	.pieBackground {
- 		background-color: $mainColor;
- 		position: absolute;
- 		width: 100px;
+ 	.pieContainer {
  		height: 100px;
- 		@include border-radius(50px);
- 	}
+ 		margin-bottom: 15px;
 
- 	.pieBackground.full {
- 		background-color: white;
- 	}
+ 		.pieBackground {
+ 			background-color: $mainColor;
+ 			position: absolute;
+ 			width: 100px;
+ 			height: 100px;
+ 			@include border-radius(50px);
+ 		}
 
- 	.pie {
- 		position: absolute;
- 		width: 100px;
- 		height: 100px;
- 		background-color: white;
- 		@include border-radius(50px);
- 		clip: rect(0px, 50px, 100px, 0px);
- 	}
+ 		.pieBackground.full {
+ 			background-color: white;
+ 		}
 
- 	.hold {
- 		position: absolute;
- 		width: 100px;
- 		height: 100px;
- 		@include border-radius(50px);
- 		clip: rect(0px, 100px, 100px, 50px);
- 	}
+ 		.pie {
+ 			position: absolute;
+ 			width: 100px;
+ 			height: 100px;
+ 			background-color: white;
+ 			@include border-radius(50px);
+ 			clip: rect(0px, 50px, 100px, 0px);
+ 		}
 
- 	#thirty-minutes .pie {
- 		@include transform(rotate(15deg));
- 	}
+ 		.hold {
+ 			position: absolute;
+ 			width: 100px;
+ 			height: 100px;
+ 			@include border-radius(50px);
+ 			clip: rect(0px, 100px, 100px, 50px);
+ 		}
 
- 	#two-hours .pie {
- 		@include transform(rotate(60deg));
- 	}
+ 		#thirty-minutes .pie {
+ 			@include transform(rotate(15deg));
+ 		}
 
- 	#six-hours .pie {
- 		@include transform(rotate(180deg));
+ 		#two-hours .pie {
+ 			@include transform(rotate(60deg));
+ 		}
+
+ 		#six-hours .pie {
+ 			@include transform(rotate(180deg));
+ 		}
  	}
- }
+}
+
+.photo-container {
+	height: 100%;
+ 	margin: 0 auto;
+ 	width:100%;
+ 	
+ 	.photo {
+		height: 100%;
+		background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent; 
+	 	-webkit-background-size: cover;
+	 	-moz-background-size: cover;
+	 	-o-background-size: cover;
+	 	background-size: cover;
+	 	@include filter(blur(5px));
+ 	}
+}
