@@ -6,10 +6,11 @@ class OpenStreetMapSeeder extends Seeder {
 
 	private $regions = array(
 		'Seine-Maritime' => 3600007426,
-		// 'Eure' => 3600007435
+		'Eure' => 3600007435
 		);
 
 	private $requests = array();
+	private $types = array();
 
 	public function run()
 	{
@@ -43,6 +44,10 @@ class OpenStreetMapSeeder extends Seeder {
 		foreach ($this->regions as $regionCode) {
 			
 			foreach ($types as $type) {
+
+				// Save type information for create use
+				$this->types[$type->category][$type->value] = $type->id;
+
 				$this->requests[] = $this->createRequest($regionCode, $type->category, $type->value);
 			}
 		}
@@ -87,6 +92,7 @@ class OpenStreetMapSeeder extends Seeder {
 				'longitude' => $element->lon,
 				'zipcode'   => $nominatim->address->postcode,
 				'city'      => $nominatim->address->city,
+				'idType'    => $this->getIdType($element),
 				));
 		}
 	}
@@ -97,5 +103,17 @@ class OpenStreetMapSeeder extends Seeder {
 		$response = current(jyggen\Curl::get($request));
 		
 		return json_decode($response->getContent());
+	}
+
+	private function getIdType($element)
+	{
+		foreach ($this->types as $category => $valueAndId) {
+			
+			foreach ($valueAndId as $value => $id) {
+
+				if (property_exists($element->tags, $category) AND $element->tags->$category == $value)
+					return $id;
+			}
+		}
 	}
 }
