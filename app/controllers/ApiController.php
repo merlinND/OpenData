@@ -25,14 +25,7 @@ class ApiController extends Controller {
 	 * @return A list of the <limit> closest places to <from>
 	 */
 	public static function getAllPlaces($from, $limit = self::MAX_RESULTS) {
-		// TODO
-		$places = array();
-		$places[] = array(
-			'id' => 1,
-			'name' => 'TODO',
-			'position' => array('lat' => 0, 'long' => 0)
-		);
-		return $places;
+		return Place::all()->slice(0, $limit);
 	}
 
 	/**
