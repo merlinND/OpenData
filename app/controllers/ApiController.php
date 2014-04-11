@@ -101,10 +101,10 @@ class ApiController extends Controller {
 
 	/**
 	 * @param n Only keep the n first results
+	 * @param $candidates Eloquent\Collection
 	 */
 	protected static function limitResults($n, $candidates) {
-		// TODO
-		return $candidates;
+		return $candidates->slice(0, $n);
 	}
 
 }
