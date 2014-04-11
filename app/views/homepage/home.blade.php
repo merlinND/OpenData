@@ -1,4 +1,4 @@
-@include('layout.header')
+@include('homepage/header')
 <div class="photo-homepage">
 	<div class="container-fluid">
 		<div class="row">
@@ -38,4 +38,4 @@
 	</div>
 	
 </div>
-@include('layout.footer')
+@include('homepage/footer')

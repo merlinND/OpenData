@@ -19,7 +19,7 @@ Route::get('/', function()
 // Launchpage
 Route::get('/home', function()
 {
-	return View::make('home');
+	return View::make('homepage/home');
 });
 
 /*
