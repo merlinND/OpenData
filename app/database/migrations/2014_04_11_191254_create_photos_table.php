@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatchPhrasesTable extends Migration {
+class CreatePhotosTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,13 @@ class CreateCatchPhrasesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('CatchPhrases', function(Blueprint $table)
+		Schema::create('photos', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('key', 255);
-			$table->string('table', 255);
-			$table->integer('idTable');
-
+			$table->text('url');
+			$table->integer('idPlace');
+			$table->integer('width');
+			$table->integer('height');
 			$table->timestamps();
 		});
 	}
@@ -30,7 +30,7 @@ class CreateCatchPhrasesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('CatchPhrases');
+		Schema::drop('photos');
 	}
 
 }

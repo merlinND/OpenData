@@ -12,7 +12,7 @@ class CreateTypesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Types', function(Blueprint $table)
+		Schema::create('types', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('category', 255);
@@ -29,7 +29,7 @@ class CreateTypesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Types');
+		Schema::drop('types');
 	}
 
 }

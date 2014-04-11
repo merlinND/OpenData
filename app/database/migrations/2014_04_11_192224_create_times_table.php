@@ -12,7 +12,7 @@ class CreateTimesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Times', function(Blueprint $table)
+		Schema::create('times', function(Blueprint $table)
 		{
 			$table->increments('id');
 			// Minimum Time in seconds
@@ -30,7 +30,7 @@ class CreateTimesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Times');
+		Schema::drop('times');
 	}
 
 }
