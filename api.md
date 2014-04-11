@@ -19,6 +19,9 @@ Critères disponibles :
 - `from` : lieu de départ (position actuelle de l'utilisateur), sous forme de chaîne `{lat:0000, long:0000}`
 - `time` : temps libre disponible. Cela limitera les lieux retournés à la fois sur leur distance à `from` (temps de déplacement), mais également sur le temps nécessaire à visiter ce lieu (par exemple, un musée est long à visiter tandis qu'un parc peut s'apprécier quel que soit le temps disponible).
 - `distance` : distance maximale du lieu à `from`, en kilomètres
+- `limit` : nombre maximal de lieux à recevoir
+
+Seul le paramètre `from` est obligatoire.
 
 Exemple :
 
