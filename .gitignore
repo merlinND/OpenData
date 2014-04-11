@@ -1,0 +1,11 @@
+# Laravel
+/bootstrap/compiled.php
+/vendor
+composer.phar
+composer.lock
+.env.local.php
+.env.php
+
+
+# Mac shit
+.DS_Store
