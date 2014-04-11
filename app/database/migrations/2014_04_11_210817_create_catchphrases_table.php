@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatchPhrasesTable extends Migration {
+class CreateCatchphrasesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -18,7 +18,6 @@ class CreateCatchPhrasesTable extends Migration {
 			$table->string('key', 255);
 			$table->string('table', 255);
 			$table->integer('idTable');
-
 			$table->timestamps();
 		});
 	}

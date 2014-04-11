@@ -16,7 +16,7 @@ class CreateTypesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('category', 255);
-			$table->integer('value');
+			$table->string('value', 255);
 			$table->integer('idTime');
 			$table->timestamps();
 		});
