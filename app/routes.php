@@ -57,3 +57,4 @@ Route::get(API_PREFIX.'/place/', function()
 	return var_dump(Input::all());
 });
 
+			if (Input::has($key) && strlen(Input::get($key)) > 0) {
