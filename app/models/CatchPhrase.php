@@ -1,16 +1,12 @@
 <?php
-
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
-class CatchPhrase extends Eloquent implements UserInterface, RemindableInterface {
+class Catchphrase extends Eloquent {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'CatchPhrases';
+	protected $table = 'catchphrases';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
