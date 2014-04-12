@@ -13,5 +13,12 @@ class Catchphrase extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array();
+	protected $hidden = array('id', 'created_at', 'updated_at');
+
+	public function scopeFromType($query) {
+		return $query->where('table', '=', 'type');
+	}
+	public function scopeFromPlace($query) {
+		return $query->where('table', '=', 'place');
+	}
 }

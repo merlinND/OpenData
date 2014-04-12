@@ -14,33 +14,50 @@ class Place extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('created_at', 'updated_at', 'idType', 'idTime');
+	protected $hidden = array('created_at', 'updated_at', 'idType', 'idTime', 'type');
 
 	public function type()
 	{
 		return $this->hasOne('Type', 'id', 'idType');
 	}
-
 	public function time()
 	{
+		if ($this->idTime == null) {
+			$this->attributes['idTime'] = $this->type->idTime;
+		}
 		return $this->hasOne('Time', 'id', 'idTime');
 	}
-
 	public function counters()
 	{
-		$counters = PlaceCounters::firstOrCreate(array(
+		$this->attributes['counters'] = PlaceCounters::firstOrCreate(array(
 			'id' => $this->id
 		));
 		return $this->hasOne('PlaceCounters', 'id');
 	}
 
-	public function getTime() {
-
-		if ($this->idTime == null)
-			return $this->type->time;
-		else
-			return $this->time;
+	/**
+	 * Either this place has at least one catchphrase of its own,
+	 * or we fallback to the cathphrases of its Type
+	 */
+	public function catchphrases() {
+		$cathphrases = CatchPhrase::fromPlace()->where('idTable', '=', $this->id)->get();
+		if (count($cathphrases) < 1) {
+			$cathphrases = CatchPhrase::fromType()->where('idTable', '=', $this->type->id);
+		}
+		return $this->hasMany('CatchPhrase', 'idTable');
 	}
+
+
+	public static function all($columns = array()) {
+		$all = Place::with('counters', 'catchphrases')->get();
+		$all->each(function($c) {
+			if ($c->idTime == null)
+				$c->attributes['idTime'] = $c->type->idTime;
+			$c->time = Time::find($c->idTime)->toArray();
+		});
+		return $all;
+	}
+
 
 	/**
 	 * Add 1 to the view counter

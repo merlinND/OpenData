@@ -13,6 +13,6 @@ class Time extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array();
+	protected $hidden = array('id', 'created_at', 'updated_at');
 
 }

@@ -16,7 +16,8 @@ class CreateCatchphrasesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('key', 255);
-			$table->string('table', 255);
+			$table->enum('table', array('types', 'places'));
+			// The id of the object in <table>
 			$table->integer('idTable');
 			$table->timestamps();
 		});
