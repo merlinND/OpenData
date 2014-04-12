@@ -16,8 +16,16 @@
 			{{{$description}}}
 		</div>
 
-		<button id="letsGo">{{{Lang::get('proposition.letsGo')}}}</button>
-		<a href="?except={{{$placeID}}}">{{{Lang::get('proposition.somethingElse')}}}</a>
+		<div class="actions">
+			<div class="col-left">
+				<button id="letsGo">
+					{{{Lang::get('proposition.letsGo')}}}
+				</button>
+			</div>
+			<div class="col-right">
+				<a href="?except={{{$placeID}}}">{{{Lang::get('proposition.somethingElse')}}}</a>
+			</div>
+		</div>
 	</div>	
 </div>
 @include('proposition/footer')
