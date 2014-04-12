@@ -66,7 +66,7 @@ class PropositionController extends Controller {
 			$catchphrase = trans($respJSON->catchphrases[rand(0, count($respJSON->catchphrases) - 1)]);
 
 		// Fetch the description
-		if (!property_exists($respJSON, "description"))
+		if (!property_exists($respJSON, "description") OR $respJSON->description == null)
 			$description = "Default description";
 		else
 			$description = $respJSON->description;
@@ -80,6 +80,8 @@ class PropositionController extends Controller {
 				$backgroundURL = 'https://farm9.staticflickr.com/8458/8055958618_5fb048a6b7_b.jpg';
 		}
 
+		// dd($respJSON);
+
 		// Expected data
 		$data = array(
 			'backgroundURL' => $backgroundURL,
@@ -88,6 +90,8 @@ class PropositionController extends Controller {
 			'description' => $description,
 			'duration' => self::timeToHours($respJSON->travelTime),
 			'placeID' => $placeID,
+			'latitude' => $respJSON->latitude,
+			'longitude' => $respJSON->longitude,
 		);
 
 		return View::make('proposition/home', $data);
