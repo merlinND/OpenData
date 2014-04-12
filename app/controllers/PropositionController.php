@@ -71,9 +71,13 @@ class PropositionController extends Controller {
 		else
 			$description = $respJSON->description;
 
+		$backgroundURL = $respJSON->photo->url;
+		if (empty($backgroundURL))
+			$backgroundURL = 'https://farm9.staticflickr.com/8458/8055958618_5fb048a6b7_b.jpg';
+
 		// Expected data
 		$data = array(
-			'backgroundURL' => $respJSON->photo->url,
+			'backgroundURL' => $backgroundURL,
 			'catchphrase' => $catchphrase,
 			'name' => $respJSON->name,
 			'description' => $description,
