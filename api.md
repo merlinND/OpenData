@@ -12,6 +12,18 @@ Exemple :
 
 	GET /place/
 
+## Récupérer tous les points d'intérêts
+
+Il existe une limite dure, définie par le serveur, sur le nombre de résultats retournés. On retourne alors la liste triée par distance euclidienne à la position de l'utilisateur.
+
+Paramètres :
+
+- `from` : lieu de départ (position actuelle de l'utilisateur), sous forme de chaîne `[-10.2,0.0048]`
+
+Exemple :
+
+	GET /place/all
+
 ## Récupérer les informations sur un point d'intérêt aléatoire
 
 Exemple :

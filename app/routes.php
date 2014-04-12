@@ -37,9 +37,11 @@ Route::match(array('GET', 'POST'), '/proposition', array('as' => 'proposition', 
 // TODO: move whole api to subdomain api.<domain>.<tld> ?
 
 // Patterns
-Route::pattern('place_id', '[0-9]+');
 
 Route::group(array('prefix' => '/api'), function() {
+
+	Route::pattern('from', '\[\d+,\d+\]');
+	Route::pattern('place_id', '[0-9]+');
 
 	Route::model('place_id', 'Place');
 	Route::get('/place/{place_id}', function(Place $place) {
@@ -48,6 +50,17 @@ Route::group(array('prefix' => '/api'), function() {
 
 	Route::get('/place/random', function() {
 		return ApiController::getRandomPlace();
+	});
+
+	Route::get('/place/all', function() {
+		$coords = json_decode(Input::get('from'));
+		if (count($coords) != 2) {
+			App::abort(404);
+			return Response::view('errors.missing', array(), 404);
+		}
+		$from = new Position($coords[0], $coords[1]);
+
+		return ApiController::getAllPlaces($from);
 	});
 
 
