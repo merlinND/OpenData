@@ -241,8 +241,10 @@ body.homepage {
   height: 100%;
   margin: 0 auto;
   width: 100%;
+  position: relative;
+  z-index: 4;
 }
-/* line 159, ../../../sass/screen.scss */
+/* line 162, ../../../sass/screen.scss */
 .photo-container .photo {
   height: 100%;
   width: 100%;
@@ -256,12 +258,12 @@ body.homepage {
   filter: blur(3px);
   position: absolute;
 }
-/* line 171, ../../../sass/screen.scss */
+/* line 174, ../../../sass/screen.scss */
 .photo-container .container-fluid {
   padding: 0;
   height: 100%;
 }
-/* line 175, ../../../sass/screen.scss */
+/* line 178, ../../../sass/screen.scss */
 .photo-container .container-fluid .arrow {
   background: url(/assets/img/arrow.png);
   width: 64px;
@@ -270,8 +272,10 @@ body.homepage {
   left: 80%;
   bottom: 15px;
   margin-left: -32px;
+  cursor: pointer;
+  z-index: 3;
 }
-/* line 185, ../../../sass/screen.scss */
+/* line 190, ../../../sass/screen.scss */
 .photo-container .container-fluid #catchphrase {
   color: white;
   position: absolute;
@@ -285,12 +289,14 @@ body.homepage {
   text-shadow: 0px -1px 10px black;
 }
 
-/* line 201, ../../../sass/screen.scss */
+/* line 206, ../../../sass/screen.scss */
 .description-container {
   background: #f1c40f;
   padding: 20px 30px;
+  position: relative;
+  z-index: 5;
 }
-/* line 207, ../../../sass/screen.scss */
+/* line 215, ../../../sass/screen.scss */
 .description-container .container-fluid h1 {
   font-family: 'EB Garamond', serif;
   color: #f1c40f;
@@ -299,21 +305,21 @@ body.homepage {
   display: inline;
   float: left;
 }
-/* line 216, ../../../sass/screen.scss */
+/* line 224, ../../../sass/screen.scss */
 .description-container .container-fluid .time-travel {
   font-style: italic;
   float: right;
   margin-top: 0.7em;
   font-size: 1.2em;
 }
-/* line 223, ../../../sass/screen.scss */
+/* line 231, ../../../sass/screen.scss */
 .description-container .container-fluid #description {
   color: #927608;
   margin: 20px 0;
   line-height: 1.5em;
   text-align: justify;
 }
-/* line 230, ../../../sass/screen.scss */
+/* line 238, ../../../sass/screen.scss */
 .description-container .container-fluid button#letsGo {
   background: #2980b9;
   border: 0;
@@ -332,38 +338,40 @@ body.homepage {
   border-radius: 100%;
 }
 
-/* line 246, ../../../sass/screen.scss */
+/* line 254, ../../../sass/screen.scss */
 .container-fluid.footer {
   background: #f1c40f;
   height: 200px;
   padding-top: 30px;
+  position: relative;
+  z-index: 5;
 }
-/* line 251, ../../../sass/screen.scss */
+/* line 261, ../../../sass/screen.scss */
 .container-fluid.footer .row {
   margin: 0;
 }
-/* line 254, ../../../sass/screen.scss */
+/* line 264, ../../../sass/screen.scss */
 .container-fluid.footer .row img {
-  height: 130px;
+  height: 100px;
 }
-/* line 258, ../../../sass/screen.scss */
+/* line 268, ../../../sass/screen.scss */
 .container-fluid.footer .row img.opendata {
   float: left;
   padding-left: 50px;
 }
-/* line 263, ../../../sass/screen.scss */
+/* line 273, ../../../sass/screen.scss */
 .container-fluid.footer .row img.departement {
   float: right;
   padding-right: 50px;
 }
 
 @-webkit-keyframes hue {
-  /* line 272, ../../../sass/screen.scss */
+  /* line 282, ../../../sass/screen.scss */
   from {
     -webkit-filter: hue-rotate(0deg);
   }
 
-  /* line 276, ../../../sass/screen.scss */
+  /* line 286, ../../../sass/screen.scss */
   to {
     -webkit-filter: hue-rotate(-360deg);
   }

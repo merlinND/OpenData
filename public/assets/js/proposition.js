@@ -5,4 +5,5 @@ $(document).ready(function() {
 		}, 1000);
 		$(this).fadeOut('fast');
 	});
+
 });
