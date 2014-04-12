@@ -38,16 +38,17 @@ class Place extends Eloquent {
 
 	/**
 	 * Either this place has at least one catchphrase of its own,
-	 * or we fallback to the cathphrases of its Type
+	 * or we fallback to the catchphrases of its Type
 	 */
 	public function catchphrases() {
-		$cathphrases = Catchphrase::fromPlace()->where('idTable', '=', $this->id)->get();
-		if (count($cathphrases) < 1) {
-			$cathphrases = Catchphrase::fromType()->where('idTable', '=', $this->type->id);
-		}
+		// $catchphrases = Catchphrase::fromPlace()->where('idTable', '=', $this->id)->get();
+		// if ($catchphrases->isEmpty()) {
+		// 	$catchphrases = Catchphrase::fromType()->where('idTable', '=', $this->type->id)->get();
+		// }
+		// $this->catchphrases = $catchphrases->toArray();
+
 		return $this->hasMany('Catchphrase', 'idTable');
 	}
-
 
 	public static function all($columns = array()) {
 		$all = Place::with('photo', 'counters', 'catchphrases')->get();
@@ -61,6 +62,7 @@ class Place extends Eloquent {
 			
 			// Desperate times...
 			$c->time;
+			//$c->loadCatchphrases();
 		});
 		return $all;
 	}

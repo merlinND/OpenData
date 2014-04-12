@@ -8,7 +8,7 @@ class CatchphraseSeeder extends Seeder {
 	{
 		$types = Type::all();
 		foreach ($types as $type) {
-			if($type->value=='museum') {
+			if($type->value == 'museum') {
 				Catchphrase::create(array(
 					'key'=>'catchphrases.typeMuseum1',
 					'table'=> 'types',
@@ -21,7 +21,7 @@ class CatchphraseSeeder extends Seeder {
 					));
 			}
 	// - - - - - - - - - - - - - - - - - - - - - -//
-			else if ($type->value =='artwork') {
+			else if ($type->value == 'artwork') {
 				Catchphrase::create(array(
 					'key'=>'catchphrases.typeArtwork1',
 					'table'=> 'types',
@@ -29,7 +29,7 @@ class CatchphraseSeeder extends Seeder {
 					));
 			}
 	// - - - - - - - - - - - - - - - - - - - - - -//
-			else if ($type->value =='viewpoint') {
+			else if ($type->value == 'viewpoint') {
 				Catchphrase::create(array(
 					'key'=>'catchphrases.typeViewpoint1',
 					'table'=> 'types',
@@ -38,7 +38,7 @@ class CatchphraseSeeder extends Seeder {
 			}
 
 	// - - - - - - - - - - - - - - - - - - - - - -//
-			else if ($type->value =='theme_park') {
+			else if ($type->value == 'theme_park') {
 				Catchphrase::create(array(
 					'key'=>'catchphrases.typeThemePark1',
 					'table'=> 'types',

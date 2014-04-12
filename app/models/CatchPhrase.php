@@ -17,10 +17,10 @@ class Catchphrase extends Eloquent {
 	protected $fillable = array('key', 'table', 'idTable');
 
 	public function scopeFromType($query) {
-		return $query->where('table', '=', 'type');
+		return $query->where('table', '=', 'types');
 	}
 	public function scopeFromPlace($query) {
-		return $query->where('table', '=', 'place');
+		return $query->where('table', '=', 'places');
 	}
 
 	public function toArray() {
