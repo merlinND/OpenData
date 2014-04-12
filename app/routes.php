@@ -96,6 +96,6 @@ Route::group(array('prefix' => '/api'), function() {
 		// Parameter(s) => filtered search
 		$results = ApiController::getPlaces($from, $params);
 
-		return $results->flatten();
+		return $results;
 	});
 });

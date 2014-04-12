@@ -2,6 +2,8 @@
 
 class ApiController extends Controller {
 
+	const OSRM_API_URL = 'http://router.project-osrm.org';
+
 	const MAX_RESULTS = 25;
 	public static $supportedParameters = array(
 		'from',
@@ -51,7 +53,14 @@ class ApiController extends Controller {
 		if ($limit > 0)
 			$candidates = self::applyFilter('limit', $limit, $candidates, $from);
 
-		return $candidates;
+		// Remove unneeded informations from the places
+		$results = $candidates->map(function($c){
+			$c = $c->toArray();
+			unset($c['type']);
+			return $c;
+		});
+
+		return $results;
 	}
 
 	/**
@@ -104,6 +113,7 @@ class ApiController extends Controller {
 	/**
 	 * Filter depending on time_limit attribute
 	 * but also computing the needed travel time
+	 * @param $timeLimit Total time available (in seconds)
 	 * @param $candidates Eloquent\Collection
 	 */
 	protected static function filterWithTime($timeLimit, $candidates, $from) {
@@ -114,12 +124,36 @@ class ApiController extends Controller {
 			$distance = $from->distanceTo($to);
 			$time = Position::getEstimatedTravelTime($distance);
 
-			return ($time <= $timeLimit);
+			// Maximum time for *one* travel
+			// (still need time to enjoy the place, and come back)
+			$max = ($timeLimit - $c->getTime()->minimum) / 2;
+
+			return ($time <= $max);
 		});
 
 		// Second pass : actually compute travel time
 		// using the OSRM Routing API <3
-		// TODO
+		// TODO: add credit to the OSRM server used
+		$client = new Osrm\OsrmClient(self::OSRM_API_URL);
+		$routeFrom = new Osrm\Coordinate($from->lat, $from->lon);
+		$candidates = $candidates->filter(function($c) use ($timeLimit, $client, $from, $routeFrom) {
+			$routeTo = new Osrm\Coordinate($c->latitude, $c->longitude);
+
+			$distance = $from->distanceTo(new Position($c->latitude, $c->longitude));
+			$time = Position::getEstimatedTravelTime($distance);
+			try {
+				$route = $client->getRoute($routeFrom, $routeTo);
+				$time = $route->getTotalTime();
+			} catch (Exception $e) {
+			}
+
+			// Maximum time for *one* travel
+			// (still need time to enjoy the place, and come back)
+			$max = ($timeLimit - $c->getTime()->minimum) / 2;
+
+			return $time <= $max;
+		});
+
 		return $candidates;
 	}
 
