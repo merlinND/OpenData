@@ -99,7 +99,8 @@ class OpenStreetMapSeeder extends Seeder {
 				'zipcode'   => $nominatim->address->postcode,
 				'city'      => $nominatim->address->city,
 				'idType'    => $this->getIdType($element),
-				));
+				'description' => $this->getWikipediaDescription($element->tags->name),
+			));
 		}
 	}
 
@@ -109,6 +110,34 @@ class OpenStreetMapSeeder extends Seeder {
 		$response = current(jyggen\Curl::get($request));
 		
 		return json_decode($response->getContent());
+	}
+
+	private function getWikipediaDescription($pageName)
+	{
+		echo $pageName."\n";
+
+		$url = 'http://fr.wikipedia.org/w/api.php?action=parse&page='.$pageName.'&format=json&prop=text&section=0&wgMaxArticleSize=4096';
+		$result = '';
+		echo $url."\n";
+
+		$ch = curl_init($url);
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt ($ch, CURLOPT_USERAGENT, "tartetat.in bot"); 
+		$c = curl_exec($ch);
+
+		$json = json_decode($c);
+
+		if (is_object($json) AND !property_exists($json, "error")) {
+			$content = $json->{'parse'}->{'text'}->{'*'};
+
+			$pattern = '#<p>(.*)</p>#Us';
+			if (preg_match($pattern, $content, $matches)) {
+				$result = strip_tags($matches[1]);
+			}
+		}
+
+
+		return $result;
 	}
 
 	private function getIdType($element)

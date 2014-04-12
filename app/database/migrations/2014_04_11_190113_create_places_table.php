@@ -17,7 +17,7 @@ class CreatePlacesTable extends Migration {
 			$table->engine ='InnoDB';
 			$table->increments('id');
 			$table->string('name', 255);
-			$table->string('description', 255);
+			$table->text('description');
 
 			// First look : OSRM gives "mapped_coordinate" as a pair of float
 			// 8 , 6 -> 2 numbers before the decimal and 6 after
