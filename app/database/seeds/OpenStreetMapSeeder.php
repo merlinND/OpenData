@@ -104,7 +104,7 @@ class OpenStreetMapSeeder extends PlaceSeeder {
 					'zipcode'   => $nominatim->address->postcode,
 					'city'      => $nominatim->address->city,
 					'idType'    => $this->getIdType($element),
-					'description' => $this->getWikipediaDescription($element->tags->name),
+					// 'description' => $this->getWikipediaDescription($element->tags->name),
 				));
 			}
 		}
