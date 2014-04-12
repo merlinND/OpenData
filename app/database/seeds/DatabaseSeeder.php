@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('TypeTableSeeder');
 		$this->call('OpenStreetMapSeeder');
+		$this->call('ScoreSeeder');
 	}
 
 }
