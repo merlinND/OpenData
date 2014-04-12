@@ -15,10 +15,8 @@ class CreatePlacesCountersTable extends Migration {
 		Schema::create('places_counters', function(Blueprint $table)
 		{
 			$table->engine ='InnoDB';
-			$table->increments('id');
-			$table->integer('idPlace')
-					->unsigned()
-					->references('id')->on('places');
+			$table->increments('id')
+					->unsigned();
 					// ->onDelete('cascade');
 			$table->integer('display');
 			$table->integer('go');
