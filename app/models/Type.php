@@ -17,12 +17,12 @@ class Type extends Eloquent {
 
 	public function places()
 	{
-		return $this->hasMany('Place', 'idType');
+		return $this->hasMany('Place', 'id', 'idType');
 	}
 
 	public function time()
 	{
-		return $this->hasOne('Time', 'idTime');
+		return $this->hasOne('Time', 'id', 'idTime');
 	}
 
 }
