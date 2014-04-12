@@ -41,10 +41,9 @@ Route::pattern('place_id', '[0-9]+');
 
 Route::group(array('prefix' => '/api'), function() {
 
-	//Route::model('place_id', 'Place');
-	//Route::get('/place/{place_id}', function(Place $place) {
-	Route::get('/place/{place_id}', function($place_id) {
-		return "TODO: retourner l'endroit avec id $place_id.";
+	Route::model('place_id', 'Place');
+	Route::get('/place/{place_id}', function(Place $place) {
+		return $place;
 	});
 
 	Route::get('/place/random', function() {
