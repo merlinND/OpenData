@@ -41,33 +41,43 @@ class ApiController extends Controller {
 		}
 
 		foreach ($filters as $filter => $value) {
-			$candidates = self::filter($filter, $value, $candidates);
+			$candidates = self::filter($filter, $value, $candidates, $from);
 		}
 		
 		// TODO : score => ranking
 
 		// Finally, apply 'limit' filter
 		if ($limit > 0)
-			$candidates = self::filter('limit', $limit, $candidates);
+			$candidates = self::filter('limit', $limit, $candidates, $from);
 
 		return $candidates;
 	}
 
 	/**
 	 * Apply the filter corresponding to the <key>
-	 * and return the filtered set
+	 * and return the filtered set.
 	 * @param $data Eloquent\Collection
 	 */
-	protected static function filter($key, $value, $data) {
+	protected static function filter($key, $value, $data, $from) {
 		switch ($key) {
 			case 'time':
-				return self::filterWithTime($value, $data);
+				return self::filterWithTime($value, $data, $from);
+
 			case 'distance':
-				return self::filterWithDistance($value, $data);
+				if (!isset($value['max']))
+					$value['max'] = PHP_INT_MAX;
+				if (!isset($value['min']))
+					$value['min'] = 0;
+
+				return self::filterWithDistance($value, $data, $from);
+
 			case 'except':
-				return self::excludePlaces($value, $data);
+				$placesId = json_decode($value);
+				return self::excludePlaces($placesId, $data, $from);
+
 			case 'limit':
-				return self::limitResults($value, $data);
+				return self::limitResults($value, $data, $from);
+
 			default:
 				return $data;
 		}
@@ -75,11 +85,20 @@ class ApiController extends Controller {
 
 	/**
 	 * Filter depending on euclidian distance from <from>
+	 * @param $distances Associative array {'min'=>, 'max'=>}
 	 * @param $candidates Eloquent\Collection
+	 * @param $from The position of the origin
 	 */
-	protected static function filterWithDistance($params, $candidates) {
-		// TODO
-		return $candidates;
+	protected static function filterWithDistance($distances, $candidates, $from) {
+
+		$excluder = function($c) use ($from, $distances) {
+			$destination = new Position($c->latitude, $c->longitude);
+			$distance = $from->distanceTo($destination);
+
+			return ($distance >= $distances['min'] && $distance <= $distances['max']);
+		};
+
+		return $candidates->filter($excluder);
 	}
 
 	/**
@@ -87,18 +106,16 @@ class ApiController extends Controller {
 	 * but also computing the needed travel time
 	 * @param $candidates Eloquent\Collection
 	 */
-	protected static function filterWithTime($timeLimit, $candidates) {
+	protected static function filterWithTime($timeLimit, $candidates, $from) {
 		// TODO: first compute rough travel time based on euclidian distance and constant travel speed, then call the travel API only whith what's left
 		return $candidates;
 	}
 
 	/**
-	 * @param placesId String of format [id1, id2, id3, ...]
+	 * @param placesId List of ids [id1, id2, id3, ...]
 	 * @param $candidates Eloquent\Collection
 	 */
 	protected static function excludePlaces($placesId, $candidates) {
-
-		$placesId = json_decode($placesId);
 
 		$excluder = function($candidate) use ($placesId) {
 			return !in_array($candidate->id, $placesId);
