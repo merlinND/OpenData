@@ -35,7 +35,7 @@ class PropositionController extends Controller {
 
 		$data = array(
 			'from' => '['.$latitude.','.$longitude.']',
-			'time' => 70000,
+			'time' => $duration,
 			'limit' => 1,
 		);
 

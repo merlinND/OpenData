@@ -11,15 +11,9 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
 // Launchpage
 // You can change the URL, but keep the name of the route!
-Route::get('/home', array('as' => 'home', function()
-{
+Route::get('/', array('as' => 'home', function() {
 	return View::make('homepage/home');
 }));
 
