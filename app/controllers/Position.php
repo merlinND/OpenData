@@ -26,21 +26,21 @@ class Position {
 	// Properties
 	public $lat, $lon;
 
-	/**
-	 * @return An array ('lat' => <latitude>, 'long' => <longitude>)
-	 */
 	public function __construct($latitude, $longitude) {
 		$this->lat = $latitude;
 		$this->lon = $longitude;
 	}
 
+	/**
+	 * Compute the euclidian distance to another position.
+	 */
 	public function distanceTo($destination) {
 		return self::distance($this, $destination);
 	}
 
 
 	/**
-	 * Compute the distance between two positions.
+	 * Compute the euclidian distance between two positions.
 	 * @param $p1 Instance of Position
 	 * @param $p2 Instance of Position
 	 * @param unit Supported units : 'K' => kilometers, otherwise => miles 

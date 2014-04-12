@@ -18,14 +18,19 @@ class Place extends Eloquent {
 
 	public function type()
 	{
-		return $this->hasOne('Type', 'idType');
+		return $this->hasOne('Type', 'id', 'idType');
 	}
 
-	public function getTime($id) {
+	public function time()
+	{
+		return $this->hasOne('Time', 'id', 'idTime');
+	}
+
+	public function getTime() {
 
 		if ($this->idTime == null)
-			return $this->type()->time();
+			return $this->type->time;
 		else
-			return $this->time();
+			return $this->time;
 	}
 }

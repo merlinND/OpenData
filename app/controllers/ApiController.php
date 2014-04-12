@@ -21,6 +21,7 @@ class ApiController extends Controller {
 	 * @return Eloquent\Collection of the <limit> closest places to <from>
 	 */
 	public static function getAllPlaces($from, $limit = self::MAX_RESULTS) {
+		// TODO: choose the closest
 		return Place::all()->slice(0, $limit);
 	}
 
@@ -41,14 +42,14 @@ class ApiController extends Controller {
 		}
 
 		foreach ($filters as $filter => $value) {
-			$candidates = self::filter($filter, $value, $candidates, $from);
+			$candidates = self::applyFilter($filter, $value, $candidates, $from);
 		}
 		
 		// TODO : score => ranking
 
 		// Finally, apply 'limit' filter
 		if ($limit > 0)
-			$candidates = self::filter('limit', $limit, $candidates, $from);
+			$candidates = self::applyFilter('limit', $limit, $candidates, $from);
 
 		return $candidates;
 	}
@@ -58,7 +59,7 @@ class ApiController extends Controller {
 	 * and return the filtered set.
 	 * @param $data Eloquent\Collection
 	 */
-	protected static function filter($key, $value, $data, $from) {
+	protected static function applyFilter($key, $value, $data, $from) {
 		switch ($key) {
 			case 'time':
 				return self::filterWithTime($value, $data, $from);
@@ -91,14 +92,13 @@ class ApiController extends Controller {
 	 */
 	protected static function filterWithDistance($distances, $candidates, $from) {
 
-		$excluder = function($c) use ($from, $distances) {
+		$keeper = function($c) use ($from, $distances) {
 			$destination = new Position($c->latitude, $c->longitude);
 			$distance = $from->distanceTo($destination);
-
 			return ($distance >= $distances['min'] && $distance <= $distances['max']);
 		};
 
-		return $candidates->filter($excluder);
+		return $candidates->filter($keeper);
 	}
 
 	/**
@@ -107,7 +107,19 @@ class ApiController extends Controller {
 	 * @param $candidates Eloquent\Collection
 	 */
 	protected static function filterWithTime($timeLimit, $candidates, $from) {
-		// TODO: first compute rough travel time based on euclidian distance and constant travel speed, then call the travel API only whith what's left
+		// First pass : eliminate most candidates
+		// through a rough estimate of travel time
+		$candidates = $candidates->filter(function($c) use ($timeLimit, $from) {
+			$to = new Position($c->latitude, $c->longitude);
+			$distance = $from->distanceTo($to);
+			$time = Position::getEstimatedTravelTime($distance);
+
+			return ($time <= $timeLimit);
+		});
+
+		// Second pass : actually compute travel time
+		// using the OSRM Routing API <3
+		// TODO
 		return $candidates;
 	}
 
