@@ -3,14 +3,15 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
- @import "compass/reset";
- @import "compass";
- @import "compass/css3/transform";
- @import 'compass/css3/filter';
+@import "compass/reset";
+@import "compass";
+@import "compass/css3/transform";
+@import 'compass/css3/filter';
 
- @import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Raleway);
 
  $mainColor: #c0392b;
+ $blackTransparent: rgba(0,0, 0, .5);
 
  .no-padding {
  	padding: 0;
@@ -137,11 +138,32 @@
  	
  	.photo {
 		height: 100%;
+		width: 100%;
 		background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent; 
 	 	-webkit-background-size: cover;
 	 	-moz-background-size: cover;
 	 	-o-background-size: cover;
 	 	background-size: cover;
-	 	@include filter(blur(5px));
+	 	@include filter(blur(3px));
+	 	position: absolute;
+ 	}
+
+ 	.container-fluid {
+ 		padding: 0;
+		height: 100%;
+
+ 		#catchphrase {
+ 			color: white;
+ 			position: absolute;
+ 			z-index: 500;
+ 			font-size: 2.6em;
+ 			padding: 10px 20px;
+ 			line-height: 1.5em;
+ 			width: 70%;
+ 			font-family: 'Source Sans Pro', sans-serif;
+ 			font-weight: 300;
+ 			@include text-shadow(0px -1px 10px black);
+
+ 		}
  	}
 }
