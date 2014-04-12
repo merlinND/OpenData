@@ -41,23 +41,20 @@ Route::pattern('place_id', '[0-9]+');
 
 Route::group(array('prefix' => '/api'), function() {
 
-	//Route::model('place_id', 'Place');
-	//Route::get('/place/{place_id}', function(Place $place) {
-	Route::get('/place/{place_id}', function($place_id) {
-		return "TODO: retourner l'endroit avec id $place_id.";
+	Route::model('place_id', 'Place');
+	Route::get('/place/{place_id}', function(Place $place) {
+		return $place;
 	});
 
-	Route::get('/place/test', function() {
-		$r = array();
-		$r[] = Input::get('q');
-		$r[] = json_decode(Input::get('q'));
-		return var_dump($r);
+	Route::get('/place/random', function() {
+		return ApiController::getRandomPlace();
 	});
+
 
 	Route::get('/place/', function() {
-		// No parameter => random place
+		// No parameter => top ranked
 		if(count(Input::all()) < 1)
-			return ApiController::getRandomPlace();
+			return ApiController::getTopRankedPlace();
 
 		// No valid parameter => 404 error
 		$params = array();

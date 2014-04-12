@@ -6,6 +6,18 @@ Les données sont toujours retournées au format JSON.
 
 # Fonctionnalités
 
+## Récupérer les informations sur le point d'intérêt le mieux noté
+
+Exemple :
+
+	GET /place/
+
+## Récupérer les informations sur un point d'intérêt aléatoire
+
+Exemple :
+
+	GET /place/random
+
 ## Récupérer les informations sur un point d'intérêt à partir de son identifiant
 
 Exemple :
