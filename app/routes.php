@@ -78,7 +78,7 @@ Route::group(array('prefix' => '/api'), function() {
 			App::abort(404);
 			return Response::view('errors.missing', array(), 404);
 		}
-		$from = Utils::position($coords[0], $coords[1]);
+		$from = new Position($coords[0], $coords[1]);
 
 		// Interpreting the meaning of the <distance> parameter
 		// Nothing specified => talking about max distance

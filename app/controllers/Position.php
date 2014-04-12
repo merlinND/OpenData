@@ -1,6 +1,6 @@
 <?php
 
-class Utils {
+class Position {
 
 	/**
 	 * Maximum distance (in kilometers) at which we
@@ -23,29 +23,32 @@ class Utils {
 		'driving' => 130
 	);
 
+	// Properties
+	public $lat, $lon;
+
 	/**
 	 * @return An array ('lat' => <latitude>, 'long' => <longitude>)
 	 */
-	static function position($latitude, $longitude) {
-		return array(
-			'lat' => $latitude,
-			'lon' => $longitude
-		);
+	function __construct__($latitude, $longitude) {
+		$this->lat = $latitude;
+		$this->lon = $longitude;
 	}
+
+	function distanceTo($destination) {
+		return self::distance($this, $destination);
+	}
+
 
 	/**
 	 * Compute the distance between two positions.
-	 * @param position An array ('lat' => 1.0, 'long' => -2.5)
+	 * @param $p1 Instance of Position
+	 * @param $p2 Instance of Position
 	 * @param unit Supported units : 'K' => kilometers, otherwise => miles 
 	 */
-	static function distance($position1, $position2, $unit = 'K') {
-		$lat1 = $position1['lat'];
-		$lon1 = $position1['lon'];
-		$lat2 = $position2['lat'];
-		$lon2 = $position2['lon'];
+	static function distance($p1, $p2, $unit = 'K') {
 
-		$theta = $lon1 - $lon2;
-		$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+		$theta = $p1->lon - $p2->lon;
+		$dist = sin(deg2rad($p1->lat)) * sin(deg2rad($p2->lat)) +  cos(deg2rad($p1->lat)) * cos(deg2rad($p2->lat)) * cos(deg2rad($theta));
 		$dist = acos($dist);
 		$dist = rad2deg($dist);
 		$miles = $dist * 60 * 1.1515;
