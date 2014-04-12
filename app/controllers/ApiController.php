@@ -163,7 +163,7 @@ class ApiController extends Controller {
 
 			// Maximum time for *one* travel
 			// (still need time to enjoy the place, and come back)
-			$max = ($timeLimit - $c->getTime()->minimum) / 2;
+			$max = ($timeLimit - $c->time->minimum) / 2;
 
 			return ($time <= $max);
 		});
@@ -186,7 +186,7 @@ class ApiController extends Controller {
 
 			// Maximum time for *one* travel
 			// (still need time to enjoy the place, and come back)
-			$max = ($timeLimit - $c->getTime()->minimum) / 2;
+			$max = ($timeLimit - $c->time->minimum) / 2;
 
 			return $time <= $max;
 		});

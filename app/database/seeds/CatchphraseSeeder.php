@@ -7,7 +7,17 @@ class CatchphraseSeeder extends Seeder {
 	public function run()
 	{
 		Catchphrase::create(array(
-			'key'=>'catchphrases.typeMuseum',
+			'key'=>'catchphrases.typeMuseum1',
+			'table'=> 'types',
+			'idTable'=> 1
+			));
+		Catchphrase::create(array(
+			'key'=>'catchphrases.typeMuseum2',
+			'table'=> 'types',
+			'idTable'=> 1
+			));
+		Catchphrase::create(array(
+			'key'=>'catchphrases.typeMuseum3',
 			'table'=> 'types',
 			'idTable'=> 1
 			));
