@@ -2,10 +2,11 @@
 
 class PropositionController extends Controller {
 
-	public function showPlace()
+	public static function showPlace($latitude, $longitude, $duration)
 	{
 		// Fetch data from the user
-		if (Session::has('latitude')) {
+		$latitude = Session::get('latitude');
+		if ($latitude) {
 			$latitude = Session::get('latitude');
 			$longitude = Session::get('longitude');
 			$duration = Session::get('duration');
@@ -81,14 +82,14 @@ class PropositionController extends Controller {
 			'catchphrase' => $catchphrase,
 			'name' => $respJSON->name,
 			'description' => $description,
-			'duration' => $this->timeToHours($respJSON->travelTime),
+			'duration' => self::timeToHours($respJSON->travelTime),
 			'placeID' => $placeID,
 		);
 
 		return View::make('proposition/home', $data);
 	}
 
-	private function timeToHours($time) {
+	public static function timeToHours($time) {
 		$hours = floor($time / 3600);
 		$minutes = floor(($time / 60) % 60);
 
