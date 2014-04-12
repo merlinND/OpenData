@@ -41,4 +41,30 @@ class Place extends Eloquent {
 		else
 			return $this->time;
 	}
+
+	/**
+	 * Add 1 to the view counter
+	 * Call each time this Place is displayed.
+	 */
+	public function bumpViews() {
+		$this->counters->display++;
+		$this->counters->save();
+	}
+	/**
+	 * Add 1 to the go counter
+	 * Call each time this Place is selected by a user.
+	 */
+	public function bumpGo() {
+		$this->counters->go++;
+		$this->counters->save();
+	}
+	/**
+	 * Add 1 to the skip counter
+	 * Call each time a user decides not to go to this place.
+	 */
+	public function bumpSkip() {
+		$this->counters->skip++;
+		$this->counters->save();
+	}
+
 }
