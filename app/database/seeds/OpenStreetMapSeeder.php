@@ -1,5 +1,5 @@
 <?php
-class OpenStreetMapSeeder extends Seeder {
+class OpenStreetMapSeeder extends PlaceSeeder {
 
 	private $baseURL = 'http://overpass-api.de/api/interpreter?data=';
 	private $baseURLNominatim = 'http://nominatim.openstreetmap.org/reverse?format=json&';
@@ -50,11 +50,14 @@ class OpenStreetMapSeeder extends Seeder {
 			
 			foreach ($types as $type) {
 
-				// Save type information for create use
-				$this->types[$type->category][$type->value] = $type->id;
+				if ($type->category != 'opendata') {
 
-				$this->requests[] = $this->createRequest($regionCode, $type->category, $type->value);
-				echo "Request for k=".$type->category.", v=".$type->value." in ".$regionName." created.\n";
+					// Save type information for create use
+					$this->types[$type->category][$type->value] = $type->id;
+
+					$this->requests[] = $this->createRequest($regionCode, $type->category, $type->value);
+					echo "Request for k=".$type->category.", v=".$type->value." in ".$regionName." created.\n";
+				}
 			}
 		}
 	}
@@ -123,6 +126,7 @@ class OpenStreetMapSeeder extends Seeder {
 		$ch = curl_init($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt ($ch, CURLOPT_USERAGENT, "tartetat.in bot"); 
+		curl_setopt ($ch, CURLOPT_TIMEOUT, 1000); 
 		$c = curl_exec($ch);
 
 		$json = json_decode($c);

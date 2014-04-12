@@ -18,12 +18,14 @@ class PlaceCounters extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array('id', 'created_at', 'updated_at');
+	protected $appends = array('score');
+
 	protected $fillable = array('id');
 
 	/**
 	 * Compute the score based on views and skips.
 	 */
-	public function getScore() {
+	public function getScoreAttribute() {
 		$score = 0;
 		$score += self::DISPLAY_VALUE * $this->display;
 		$score += self::GO_VALUE * $this->go;

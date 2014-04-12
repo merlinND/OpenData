@@ -1,14 +1,9 @@
 <?php
-class OpenData76Seeder extends Seeder {
+class OpenData76Seeder extends PlaceSeeder {
 
 	private $baseURLNominatim = 'http://nominatim.openstreetmap.org/search?format=json&email=thibaud@dauce.fr&addressdetails=1&countrycodes=fr&state=Haute-Normandie&';
-
-	private $links = array(
-		// 'http://odata76.cloudapp.net/v1/opendata76/TAC22utilisationparthemeetaffilie?$filter=&format=json',
-		'http://odata76.cloudapp.net/v1/opendata76/ExportOpenData?$filter=&format=json',
-		'http://odata76.cloudapp.net/v1/opendata76/lieuxdediffusion?$filter=&format=json',
-		'http://odata76.cloudapp.net/v1/opendata76/ENSpoint?$filter=&format=json',
-		);
+	private $baseURLOpenData = 'http://odata76.cloudapp.net/v1/opendata76/';
+	private $endURLOpenData = '?$filter=&format=json';
 
 	private $names    = array('intitule_bibliotheque', 'organisme', 'nom_ens');
 	private $adresses = array('numero_et_adresse', 'adresse');
@@ -20,29 +15,36 @@ class OpenData76Seeder extends Seeder {
 	private $failNb     = 0;
 	private $places     = array();
 
+	private $types;
+
 	public function run()
 	{
 
 		$time = time();
 		echo "Starting requesting...\n";
-		$responses = jyggen\Curl::get($this->links);
+		$responses = jyggen\Curl::get($this->getLinks());
 		$duration = time() - $time;
 		echo "Requesting terminated. (".$duration."s elapsed)\n";
 
-		foreach ($responses as $response) {
+		foreach ($responses as $idResponse => $response) {
 			
 			$data = json_decode($response->getContent());
 			foreach ($data->d as $element) {
 				
-				$infos = $this->getInformations($element);
+				if ($this->requestsNb < 20) {
 
-				if (!empty($infos))
-				{
-					Place::create($infos);
-					$this->places[] = $infos['name'];
+					$infos = $this->getInformations($element);
+
+					if (!empty($infos))
+					{
+						$infos['idType'] = $this->types[$idResponse]->id;
+	
+						Place::create($infos);
+						$this->places[] = $infos['name'];
+					}
+					else
+						$this->failNb++;
 				}
-				else
-					$this->failNb++;
 			}
 		}
 
@@ -78,6 +80,19 @@ class OpenData76Seeder extends Seeder {
 				'city'      => $city,
 				);
 		}
+	}
+
+	private function getLinks()
+	{
+		$links = array();
+		$this->types = Type::where('category', '=', 'opendata')->get();
+
+		foreach ($this->types as $type) {
+			
+			$links[] = $this->baseURLOpenData.$type->value.$this->endURLOpenData;
+		}
+
+		return $links;
 	}
 
 	private function getProperty($element, $names)

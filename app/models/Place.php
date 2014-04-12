@@ -17,19 +17,16 @@ class Place extends Eloquent {
 	protected $hidden = array('created_at', 'updated_at', 'idType', 'idTime', 'type');
 	protected $fillable = array('description');
 
-	public function type()
-	{
+	public function type() {
 		return $this->hasOne('Type', 'id', 'idType');
 	}
-	public function time()
-	{
+	public function time() {
 		if ($this->idTime == null) {
 			$this->attributes['idTime'] = $this->type->idTime;
 		}
 		return $this->hasOne('Time', 'id', 'idTime');
 	}
-	public function counters()
-	{
+	public function counters() {
 		$this->attributes['counters'] = PlaceCounters::firstOrCreate(array(
 			'id' => $this->id
 		));
@@ -52,9 +49,15 @@ class Place extends Eloquent {
 	public static function all($columns = array()) {
 		$all = Place::with('counters', 'catchphrases')->get();
 		$all->each(function($c) {
-			if ($c->idTime == null)
-				$c->attributes['idTime'] = $c->type->idTime;
-			$c->time = Time::find($c->idTime)->toArray();
+			// if ($c->idTime == null && $c->type != null) {
+			// 	$c->attributes['idTime'] = $c->type->idTime;
+			// }
+			// $c->time = Time::find($c->idTime);
+			// if ($c->time != null)
+			// 	$c->time = $c->time->toArray();
+			
+			// Desperate times...
+			$c->time;
 		});
 		return $all;
 	}

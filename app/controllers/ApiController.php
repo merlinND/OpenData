@@ -29,7 +29,6 @@ class ApiController extends Controller {
 		});
 	}
 
-	// TODO : score => ranking
 	// TODO : update score on actions (go, skip, etc)
 	public static function getTopRankedPlace() {
 		$candidates = Place::all();
@@ -37,7 +36,7 @@ class ApiController extends Controller {
 		$maxScore = 0;
 		$top = $candidates->first();
 		$candidates = $candidates->map(function($c) use (&$top, &$maxScore) {
-			$score = $c->counters->getScore();
+			$score = $c->counters->score;
 			if ($score > $maxScore) {
 				$top = $c;
 				$maxScore = $score;
@@ -164,7 +163,7 @@ class ApiController extends Controller {
 
 			// Maximum time for *one* travel
 			// (still need time to enjoy the place, and come back)
-			$max = ($timeLimit - $c->getTime()->minimum) / 2;
+			$max = ($timeLimit - $c->time->minimum) / 2;
 
 			return ($time <= $max);
 		});
@@ -187,7 +186,7 @@ class ApiController extends Controller {
 
 			// Maximum time for *one* travel
 			// (still need time to enjoy the place, and come back)
-			$max = ($timeLimit - $c->getTime()->minimum) / 2;
+			$max = ($timeLimit - $c->time->minimum) / 2;
 
 			return $time <= $max;
 		});
