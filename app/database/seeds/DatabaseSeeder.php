@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('TypeTableSeeder');
 		$this->call('OpenStreetMapSeeder');
+		$this->call('OpenData76Seeder');
 		$this->call('ScoreSeeder');
 		$this->call('CatchphraseSeeder');
+		$this->call('FlickrSeeder');
 	}
 
 }

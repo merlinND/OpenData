@@ -14,9 +14,14 @@ class OpenStreetMapSeeder extends Seeder {
 
 	public function run()
 	{
+		echo "Starting OpenStreetMapSeeder.\n";
 		$this->createRequests();
 
+		$time = time();
+		echo "Starting requesting...\n";
 		$responses = jyggen\Curl::get($this->requests);
+		$duration = time() - $time;
+		echo "Requesting terminated. (".$duration."s elapsed)\n";
 
 		foreach ($responses as $response) {
 			
@@ -41,7 +46,7 @@ class OpenStreetMapSeeder extends Seeder {
 	{
 		$types = Type::all();
 
-		foreach ($this->regions as $regionCode) {
+		foreach ($this->regions as $regionName => $regionCode) {
 			
 			foreach ($types as $type) {
 
@@ -49,6 +54,7 @@ class OpenStreetMapSeeder extends Seeder {
 				$this->types[$type->category][$type->value] = $type->id;
 
 				$this->requests[] = $this->createRequest($regionCode, $type->category, $type->value);
+				echo "Request for k=".$type->category.", v=".$type->value." in ".$regionName." created.\n";
 			}
 		}
 	}
