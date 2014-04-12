@@ -17,10 +17,22 @@ Route::get('/', function()
 });
 
 // Launchpage
-Route::get('/home', function()
+// You can change the URL, but keep the name of the route!
+Route::get('/home', array('as' => 'home', function()
 {
 	return View::make('homepage/home');
-});
+}));
+
+// After the launchpage
+// You can change the URL, but keep the name of the route!
+// You will have these values: duration (minutes) / longitude / latitude.
+// We'll need a controller here. Get the values with Input::get('duration') etc.
+Route::post('/proposition', array('as' => 'proposition', function()
+{
+	$data = array('backgroundURL' => '/assets/img/home.jpg');
+
+	return View::make('proposition/home', $data);
+}));
 
 /*
 |--------------------------------------------------------------------------

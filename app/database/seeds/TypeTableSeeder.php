@@ -8,7 +8,10 @@ class TypeTableSeeder extends Seeder {
 		Type::create(array(
 			'category' => 'tourism',
 			'value'    => 'museum',
-			// 'idTime'   => Time::findOrCreate(2 * 60 * 60, 4 * 60 * 60)
+			'idTime'   => Time::firstOrCreate(array(
+				'minimum' => 2 * 60 * 60,
+				'maximum' => 4 * 60 * 60
+				))->id
 			));
 	}
 
