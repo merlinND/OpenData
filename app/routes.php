@@ -21,7 +21,29 @@ Route::get('/', array('as' => 'home', function() {
 // You can change the URL, but keep the name of the route!
 // You will have these values: duration (minutes) / longitude / latitude.
 // We'll need a controller here. Get the values with Input::get('duration') etc.
-Route::match(array('GET', 'POST'), '/proposition', array('as' => 'proposition', 'uses' => 'PropositionController@showPlace'));
+Route::match(array('GET', 'POST'), '/proposition', array('as' => 'proposition', function() {
+
+	// Fetch data from the user
+	$latitude = Session::get('latitude');
+	if ($latitude) {
+		$latitude = Session::get('latitude');
+		$longitude = Session::get('longitude');
+		$duration = Session::get('duration');
+	}
+	else {
+		$latitude = Input::get('latitude');
+		$longitude = Input::get('longitude');
+		$duration = (int) Input::get('duration') * 60;
+		Session::put('latitude', $latitude);
+		Session::put('longitude', $longitude);
+		Session::put('duration', $duration);
+	}
+
+	if (!$latitude || !$longitude || !$duration)
+		return Redirect::to('/', 302);
+
+	return PropositionController::showPlace($latitude, $longitude, $duration);
+}));
 
 /*
 |--------------------------------------------------------------------------
