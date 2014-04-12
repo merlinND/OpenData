@@ -59,17 +59,39 @@ class PropositionController extends Controller {
 		$placeID = $respJSON->id;
 		Session::put('previousPlaceID', $placeID);
 
+		// Fetch the catchphrase
+		if (!property_exists($respJSON, "catchphrases") OR count($respJSON->catchphrases) == 0)
+			$catchphrase = trans('catchphrases.default');
+		else
+			$catchphrase = trans($respJSON->catchphrases[rand(0, count($respJSON->catchphrases) - 1)]);
+
+		// Fetch the description
+		if (!property_exists($respJSON, "description"))
+			$description = "Default description";
+		else
+			$description = $respJSON->description;
+
 		// Expected data
 		$data = array(
-			'backgroundURL' => 'https://farm3.staticflickr.com/2211/2495499504_78eed392dd_b.jpg',
-			'catchphrase' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio augue, adipiscing sit amet ante vel, varius euismod odio.',
+			'backgroundURL' => $respJSON->photo->url,
+			'catchphrase' => $catchphrase,
 			'name' => $respJSON->name,
-			'description' => $respJSON->description,
-			'duration' => '2h20',
+			'description' => $description,
+			'duration' => $this->timeToHours($respJSON->travelTime),
 			'placeID' => $placeID,
 		);
 
 		return View::make('proposition/home', $data);
+	}
+
+	private function timeToHours($time) {
+		$hours = floor($time / 3600);
+		$minutes = floor(($time / 60) % 60);
+
+		if ($hours >= 1)
+			return $hours.'h'.$minutes;
+		else
+			return $minutes.' mns';
 	}
 
 }

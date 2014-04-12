@@ -262,6 +262,16 @@ body.homepage {
   height: 100%;
 }
 /* line 175, ../../../sass/screen.scss */
+.photo-container .container-fluid .arrow {
+  background: url(/assets/img/arrow.png);
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  left: 80%;
+  bottom: 15px;
+  margin-left: -32px;
+}
+/* line 185, ../../../sass/screen.scss */
 .photo-container .container-fluid #catchphrase {
   color: white;
   position: absolute;
@@ -275,12 +285,12 @@ body.homepage {
   text-shadow: 0px -1px 10px black;
 }
 
-/* line 191, ../../../sass/screen.scss */
+/* line 201, ../../../sass/screen.scss */
 .description-container {
   background: #f1c40f;
   padding: 20px 30px;
 }
-/* line 197, ../../../sass/screen.scss */
+/* line 207, ../../../sass/screen.scss */
 .description-container .container-fluid h1 {
   font-family: 'EB Garamond', serif;
   color: #f1c40f;
@@ -289,21 +299,21 @@ body.homepage {
   display: inline;
   float: left;
 }
-/* line 206, ../../../sass/screen.scss */
+/* line 216, ../../../sass/screen.scss */
 .description-container .container-fluid .time-travel {
   font-style: italic;
   float: right;
   margin-top: 0.7em;
   font-size: 1.2em;
 }
-/* line 213, ../../../sass/screen.scss */
+/* line 223, ../../../sass/screen.scss */
 .description-container .container-fluid #description {
   color: #927608;
   margin: 20px 0;
   line-height: 1.5em;
   text-align: justify;
 }
-/* line 220, ../../../sass/screen.scss */
+/* line 230, ../../../sass/screen.scss */
 .description-container .container-fluid button#letsGo {
   background: #2980b9;
   border: 0;
@@ -322,13 +332,38 @@ body.homepage {
   border-radius: 100%;
 }
 
+/* line 246, ../../../sass/screen.scss */
+.container-fluid.footer {
+  background: #f1c40f;
+  height: 200px;
+  padding-top: 30px;
+}
+/* line 251, ../../../sass/screen.scss */
+.container-fluid.footer .row {
+  margin: 0;
+}
+/* line 254, ../../../sass/screen.scss */
+.container-fluid.footer .row img {
+  height: 130px;
+}
+/* line 258, ../../../sass/screen.scss */
+.container-fluid.footer .row img.opendata {
+  float: left;
+  padding-left: 50px;
+}
+/* line 263, ../../../sass/screen.scss */
+.container-fluid.footer .row img.departement {
+  float: right;
+  padding-right: 50px;
+}
+
 @-webkit-keyframes hue {
-  /* line 237, ../../../sass/screen.scss */
+  /* line 272, ../../../sass/screen.scss */
   from {
     -webkit-filter: hue-rotate(0deg);
   }
 
-  /* line 241, ../../../sass/screen.scss */
+  /* line 276, ../../../sass/screen.scss */
   to {
     -webkit-filter: hue-rotate(-360deg);
   }
