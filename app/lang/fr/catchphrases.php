@@ -5,10 +5,10 @@ return array(
 
 	'typeArtwork1' => "Une oeuvre d'art dans :city ?",
 
-	'typeViewpoint1' => "Envie d'un beau panorama ?";
-	'typeViewpoint1' => "Un beau panorama de :city";
+	'typeViewpoint1' => "Envie d'un beau panorama ?",
+	'typeViewpoint1' => "Un beau panorama de :city",
 
-	'typeThemePark1' => "Il faut s'amuser au parc :name"
+	'typeThemePark1' => "Il faut s'amuser au parc :name",
 
 	'typeMediatheque1' => "La médiathèque,un espace de silence pour apprendre",
 

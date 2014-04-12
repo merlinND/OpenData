@@ -42,6 +42,7 @@ class CatchphraseSeeder extends Seeder {
 	// - - - - - - - - - - - - - - - - - - - - - -//
 			else if ($type->value == 'artwork') {
 
+
 				$catch = Catchphrase::create(array(
 					'key'     => 'catchphrases.typeArtwork1',
 					'table'   => 'types',
@@ -145,7 +146,6 @@ class CatchphraseSeeder extends Seeder {
 				}
 			}	
 		}
-
 	}
 }
 ?>

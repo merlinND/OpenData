@@ -11,15 +11,9 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
 // Launchpage
 // You can change the URL, but keep the name of the route!
-Route::get('/home', array('as' => 'home', function()
-{
+Route::get('/', array('as' => 'home', function() {
 	return View::make('homepage/home');
 }));
 
@@ -27,7 +21,33 @@ Route::get('/home', array('as' => 'home', function()
 // You can change the URL, but keep the name of the route!
 // You will have these values: duration (minutes) / longitude / latitude.
 // We'll need a controller here. Get the values with Input::get('duration') etc.
-Route::match(array('GET', 'POST'), '/proposition', array('as' => 'proposition', 'uses' => 'PropositionController@showPlace'));
+Route::match(array('GET', 'POST'), '/proposition', array('as' => 'proposition', function() {
+
+	// Fetch data from the user
+	$latitude = Session::get('latitude');
+	if ($latitude) {
+		$latitude = Session::get('latitude');
+		$longitude = Session::get('longitude');
+		$duration = Session::get('duration');
+	}
+	else {
+		$latitude = Input::get('latitude');
+		$longitude = Input::get('longitude');
+		$duration = (int) Input::get('duration') * 60;
+		Session::put('latitude', $latitude);
+		Session::put('longitude', $longitude);
+		Session::put('duration', $duration);
+	}
+
+	if (!$latitude || !$longitude || !$duration)
+		return Redirect::to('/', 302);
+
+	return PropositionController::showPlace($latitude, $longitude, $duration);
+}));
+
+Route::get('/map', function() {
+	return View::make('proposition/map', Input::all());
+});
 
 /*
 |--------------------------------------------------------------------------

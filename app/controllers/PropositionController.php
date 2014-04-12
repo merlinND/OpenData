@@ -2,10 +2,11 @@
 
 class PropositionController extends Controller {
 
-	public function showPlace()
+	public static function showPlace($latitude, $longitude, $duration)
 	{
 		// Fetch data from the user
-		if (Session::has('latitude')) {
+		$latitude = Session::get('latitude');
+		if ($latitude) {
 			$latitude = Session::get('latitude');
 			$longitude = Session::get('longitude');
 			$duration = Session::get('duration');
@@ -35,7 +36,7 @@ class PropositionController extends Controller {
 
 		$data = array(
 			'from' => '['.$latitude.','.$longitude.']',
-			'time' => 70000,
+			'time' => $duration,
 			'limit' => 1,
 		);
 
@@ -55,7 +56,6 @@ class PropositionController extends Controller {
 			return Response::view('errors.missing', array(), 404);
 		
 
-		// TODO, change $placeID
 		$placeID = $respJSON->id;
 		Session::put('previousPlaceID', $placeID);
 
@@ -66,25 +66,38 @@ class PropositionController extends Controller {
 			$catchphrase = trans($respJSON->catchphrases[rand(0, count($respJSON->catchphrases) - 1)]);
 
 		// Fetch the description
-		if (!property_exists($respJSON, "description"))
-			$description = "Default description";
+		if (!property_exists($respJSON, "description") OR $respJSON->description == null)
+			$description = "";
 		else
 			$description = $respJSON->description;
+		
+		// Check if we have a background or not
+		if (!property_exists($respJSON, "photo") OR $respJSON->photo == null)
+			$backgroundURL = 'https://farm9.staticflickr.com/8458/8055958618_5fb048a6b7_b.jpg';
+		else {
+			$backgroundURL = $respJSON->photo->url;
+			if (empty($backgroundURL))
+				$backgroundURL = 'https://farm9.staticflickr.com/8458/8055958618_5fb048a6b7_b.jpg';
+		}
+
+		// dd($respJSON);
 
 		// Expected data
 		$data = array(
-			'backgroundURL' => $respJSON->photo->url,
+			'backgroundURL' => $backgroundURL,
 			'catchphrase' => $catchphrase,
 			'name' => $respJSON->name,
 			'description' => $description,
-			'duration' => $this->timeToHours($respJSON->travelTime),
+			'duration' => self::timeToHours($respJSON->travelTime),
 			'placeID' => $placeID,
+			'latitude' => $respJSON->latitude,
+			'longitude' => $respJSON->longitude,
 		);
 
 		return View::make('proposition/home', $data);
 	}
 
-	private function timeToHours($time) {
+	public static function timeToHours($time) {
 		$hours = floor($time / 3600);
 		$minutes = floor(($time / 60) % 60);
 
