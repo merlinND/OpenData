@@ -14,9 +14,13 @@ class CreatePhotosTable extends Migration {
 	{
 		Schema::create('photos', function(Blueprint $table)
 		{
+			$table->engine ='InnoDB';
 			$table->increments('id');
 			$table->text('url');
-			$table->integer('idPlace');
+			$table->integer('idPlace')
+				->unsigned()
+				->references('id')->on('places');
+					// ->onDelete('cascade');
 			$table->integer('width');
 			$table->integer('height');
 			$table->timestamps();

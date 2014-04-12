@@ -14,10 +14,14 @@ class CreateTypesTable extends Migration {
 	{
 		Schema::create('types', function(Blueprint $table)
 		{
+			$table->engine ='InnoDB';
 			$table->increments('id');
 			$table->string('category', 255);
 			$table->string('value', 255);
-			$table->integer('idTime');
+			$table->integer('idTime')
+					->unsigned()
+					->references('id')->on('times');
+					// ->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
