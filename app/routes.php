@@ -45,6 +45,10 @@ Route::match(array('GET', 'POST'), '/proposition', array('as' => 'proposition', 
 	return PropositionController::showPlace($latitude, $longitude, $duration);
 }));
 
+Route::get('/map', function() {
+	return View::make('proposition/map', Input::all());
+});
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

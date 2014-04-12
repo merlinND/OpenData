@@ -11,7 +11,7 @@
 
  @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|EB+Garamond|Raleway);
 
- $mainColor: #f1c40f;
+ $mainColor: #F1C469;
  $contrastColor: #2980b9;
  $blackTransparent: rgba(0,0, 0, .5);
 
@@ -175,7 +175,7 @@
  		-moz-background-size: cover;
  		-o-background-size: cover;
  		background-size: cover;
- 		@include filter(blur(3px));
+ 		@include filter(blur(2px));
  		position: absolute;
  	}
 
@@ -217,51 +217,68 @@
  	position: relative;
 	z-index: 5;
 
+	h1 {
+		//font-family: 'EB Garamond', serif;
+		color: $mainColor;
+		font-size: 2.5em;
+		color: white;
+		display: inline;
+		float: left;
+	}
 
- 	.container-fluid {
+	.time-travel {
+		font-style: italic;
+		float: right;
+		margin-top: 0.7em;
+		font-size: 1.2em;
+	}
 
- 		h1 {
- 			font-family: 'EB Garamond', serif;
- 			color: $mainColor;
- 			font-size: 2.5em;
- 			color: white;
- 			display: inline;
- 			float: left;
- 		}
+	#description {
+		color: darken($mainColor, 20%);
+		margin: 20px 0;
+		line-height: 1.5em;
+		text-align: justify; 
+	}
 
- 		.time-travel {
- 			font-style: italic;
- 			float: right;
- 			margin-top: 0.7em;
- 			font-size: 1.2em;
- 		}
+	.actions {
+		height: 140px;
 
- 		#description {
- 			color: darken($mainColor, 20%);
- 			margin: 20px 0;
- 			line-height: 1.5em;
- 			text-align: justify; 
- 		}
+		.col-left {
+			width: 60%;
+			float: left;
+		}
+		.col-right {
+			width: 20%;
+			float: right;
+			height: 40px;
+			padding: 60px 0;
+		}
 
- 		button#letsGo {
- 			background: $contrastColor;
- 			border: 0;
- 			padding: 10px 20px;
- 			color: white;
- 			font-size: 1.2em;
- 			width: 140px;
- 			height: 140px;
- 			margin: 0 auto;
- 			border: 3px solid lighten($contrastColor, 35%);
- 			display: block;
- 			@include border-radius(100%);
- 		}
- 	}
+		button#letsGo {
+			background: $contrastColor;
+			border: 0;
+			padding: 10px 20px;
+			color: white;
+			font-size: 1.2em;
+			width: 140px;
+			height: 140px;
+			float: right;
+
+			border: 3px solid lighten($contrastColor, 35%);
+			display: block;
+			@include border-radius(100%);
+		}
+		
+		a {
+			float: right;
+		}
+	}
+
  }
 
  .container-fluid.footer {
  	background: $mainColor;
- 	height: 200px;
+ 	height: 100px;
  	padding-top: 30px;
  	position: relative;
 	z-index: 5;
@@ -270,17 +287,17 @@
  		margin: 0;
 
 	 	img {
-	 		height: 100px;
+	 		height: 50px;
 	 	}
 
 	 	img.opendata {
-	 		float:left;
-	 		padding-left: 50px;
+	 		float:right;
+	 		padding-right: 50px;
 	 	}
 
 	 	img.departement {
-	 		float:right;
-	 		padding-right: 50px;
+	 		float:left;
+	 		padding-left: 50px;
 	 	}
  	}
 
