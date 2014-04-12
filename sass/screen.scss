@@ -3,14 +3,16 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-@import "compass/reset";
-@import "compass";
-@import "compass/css3/transform";
-@import 'compass/css3/filter';
+ @import "compass/reset";
+ @import "compass";
+ @import "compass/css3/transform";
+ @import 'compass/css3/filter';
+ @import 'compass/css3/filter';
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Raleway);
+ @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|EB+Garamond|Raleway);
 
- $mainColor: #c0392b;
+ $mainColor: #f1c40f;
+ $contrastColor: #2980b9;
  $blackTransparent: rgba(0,0, 0, .5);
 
  .no-padding {
@@ -40,6 +42,10 @@
  	}
  }
 
+ .clear {
+ 	clear: both;
+ }
+
  .homepage-photo-container {
  	height: 100%;
  	margin: 0 auto;
@@ -51,6 +57,7 @@
 
  		.container-fluid {
  			height: 100%;
+ 			padding: 0;
 
  			.title {
  				height: 20%;
@@ -59,104 +66,117 @@
  					padding-top: 10%;
  					font-size: 4em;
  					text-align: center;
+ 					background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+ 					-webkit-background-clip: text;
+ 					-webkit-text-fill-color: transparent;
+ 					-webkit-animation: hue 60s infinite linear;
  				}
  			}
+ 			form {
+ 			height: 80%;
 
- 			.row {
- 				height: 40%;
- 				width: 100%;
+ 				.row {
+ 					height: 40%;
+ 					width: 100%;
+ 					margin: 0;
+ 					padding-top: 15%;
+ 					display: block;
 
- 				.col-xs-6 {
- 					padding: 15% 15%;
- 					cursor: pointer;
+ 					.col-xs-6 {
+ 						cursor: pointer;
+ 						text-align: center;
+ 						min-height: 100%;
 
- 					span.time {
- 						text-align:center;
- 						font-size: 1.2em;
- 						color: white;
- 						@include text-shadow(2px 1px 1px black);
- 					}
- 					span.time.two-hours {
- 						margin-left: 15px;
+ 						.pieContainer {
+ 							height: 100px;
+ 							margin-bottom: 30px;
+ 							display: inline-block;
+
+ 							.pieBackground {
+ 								background-color: transparent;
+ 								position: absolute;
+ 								width: 100px;
+ 								height: 100px;
+ 								border: 1px solid white;
+ 								@include border-radius(50px);
+ 							}
+
+ 							.pieBackground.full {
+ 								background-color: white;
+ 							}
+
+ 							.pie {
+ 								position: absolute;
+ 								width: 100px;
+ 								height: 100px;
+ 								background-color: white;
+ 								@include border-radius(50px);
+ 								clip: rect(0px, 50px, 100px, 0px);
+ 							}
+
+ 							.hold {
+ 								position: absolute;
+ 								width: 100px;
+ 								height: 100px;
+ 								@include border-radius(50px);
+ 								clip: rect(0px, 100px, 100px, 50px);
+ 							}
+
+ 							#thirty-minutes .pie {
+ 								@include transform(rotate(15deg));
+ 							}
+
+ 							#two-hours .pie {
+ 								@include transform(rotate(60deg));
+ 							}
+
+ 							#six-hours .pie {
+ 								@include transform(rotate(180deg));
+ 							}
+ 						}
+
+ 						span.time {
+ 							text-align:center;
+ 							font-size: 1.3em;
+ 							color: white;
+ 							@include text-shadow(2px 1px 1px black);
+ 						}
+ 						span.time.two-hours {
+ 							margin-left: 15px;
+ 						}
  					}
  				}
  			}
  		}
  	}
+ }
 
- 	.pieContainer {
- 		height: 100px;
- 		margin-bottom: 15px;
-
- 		.pieBackground {
- 			background-color: $mainColor;
- 			position: absolute;
- 			width: 100px;
- 			height: 100px;
- 			@include border-radius(50px);
- 		}
-
- 		.pieBackground.full {
- 			background-color: white;
- 		}
-
- 		.pie {
- 			position: absolute;
- 			width: 100px;
- 			height: 100px;
- 			background-color: white;
- 			@include border-radius(50px);
- 			clip: rect(0px, 50px, 100px, 0px);
- 		}
-
- 		.hold {
- 			position: absolute;
- 			width: 100px;
- 			height: 100px;
- 			@include border-radius(50px);
- 			clip: rect(0px, 100px, 100px, 50px);
- 		}
-
- 		#thirty-minutes .pie {
- 			@include transform(rotate(15deg));
- 		}
-
- 		#two-hours .pie {
- 			@include transform(rotate(60deg));
- 		}
-
- 		#six-hours .pie {
- 			@include transform(rotate(180deg));
- 		}
- 	}
-}
-
-.photo-container {
-	height: 100%;
+ .photo-container {
+ 	height: 100%;
  	margin: 0 auto;
  	width:100%;
  	
  	.photo {
-		height: 100%;
-		width: 100%;
-		background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent; 
-	 	-webkit-background-size: cover;
-	 	-moz-background-size: cover;
-	 	-o-background-size: cover;
-	 	background-size: cover;
-	 	@include filter(blur(3px));
-	 	position: absolute;
+ 		height: 100%;
+ 		width: 100%;
+ 		background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent; 
+ 		-webkit-background-size: cover;
+ 		-moz-background-size: cover;
+ 		-o-background-size: cover;
+ 		background-size: cover;
+ 		@include filter(blur(3px));
+ 		position: absolute;
  	}
 
  	.container-fluid {
  		padding: 0;
-		height: 100%;
+ 		height: 100%;
 
  		#catchphrase {
  			color: white;
  			position: absolute;
  			z-index: 500;
- 			font-size: 2.6em;
+ 			font-size: 2.5em;
  			padding: 10px 20px;
  			line-height: 1.5em;
  			width: 70%;
@@ -166,4 +186,59 @@
 
  		}
  	}
-}
+ }
+
+ .description-container {
+ 	background: $mainColor;
+ 	padding: 20px 30px;
+
+ 	.container-fluid {
+
+ 		h1 {
+ 			font-family: 'EB Garamond', serif;
+ 			color: $mainColor;
+ 			font-size: 2.5em;
+ 			color: white;
+ 			display: inline;
+ 			float: left;
+ 		}
+
+ 		.time-travel {
+ 			font-style: italic;
+ 			float: right;
+ 			margin-top: 0.7em;
+ 			font-size: 1.2em;
+ 		}
+
+ 		#description {
+ 			color: darken($mainColor, 20%);
+ 			margin: 20px 0;
+ 			line-height: 1.5em;
+ 			text-align: justify; 
+ 		}
+
+ 		button#letsGo {
+ 			background: $contrastColor;
+ 			border: 0;
+ 			padding: 10px 20px;
+ 			color: white;
+ 			font-size: 1.2em;
+ 			width: 140px;
+ 			height: 140px;
+ 			margin: 0 auto;
+ 			border: 3px solid lighten($contrastColor, 35%);
+ 			display: block;
+ 			@include border-radius(100%);
+ 		}
+ 	}
+ }
+
+ @-webkit-keyframes hue {
+ 	from {
+ 		-webkit-filter: hue-rotate(0deg);
+ 	}
+
+ 	to {
+ 		-webkit-filter: hue-rotate(-360deg);
+ 	}
+ }

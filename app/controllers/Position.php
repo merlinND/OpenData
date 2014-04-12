@@ -29,12 +29,12 @@ class Position {
 	/**
 	 * @return An array ('lat' => <latitude>, 'long' => <longitude>)
 	 */
-	function __construct__($latitude, $longitude) {
+	public function __construct($latitude, $longitude) {
 		$this->lat = $latitude;
 		$this->lon = $longitude;
 	}
 
-	function distanceTo($destination) {
+	public function distanceTo($destination) {
 		return self::distance($this, $destination);
 	}
 
@@ -46,7 +46,6 @@ class Position {
 	 * @param unit Supported units : 'K' => kilometers, otherwise => miles 
 	 */
 	static function distance($p1, $p2, $unit = 'K') {
-
 		$theta = $p1->lon - $p2->lon;
 		$dist = sin(deg2rad($p1->lat)) * sin(deg2rad($p2->lat)) +  cos(deg2rad($p1->lat)) * cos(deg2rad($p2->lat)) * cos(deg2rad($theta));
 		$dist = acos($dist);
