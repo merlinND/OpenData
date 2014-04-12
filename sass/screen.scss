@@ -175,7 +175,7 @@
  		-moz-background-size: cover;
  		-o-background-size: cover;
  		background-size: cover;
- 		@include filter(blur(3px));
+ 		@include filter(blur(2px));
  		position: absolute;
  	}
 

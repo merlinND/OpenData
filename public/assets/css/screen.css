@@ -259,9 +259,9 @@ body.homepage {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  filter: blur(3px);
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  filter: blur(2px);
   position: absolute;
 }
 /* line 182, ../../../sass/screen.scss */
