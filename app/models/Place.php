@@ -26,6 +26,9 @@ class Place extends Eloquent {
 		}
 		return $this->hasOne('Time', 'id', 'idTime');
 	}
+	public function photo() {
+		return $this->hasOne('Photo', 'idPlace', 'id');
+	}
 	public function counters() {
 		$this->attributes['counters'] = PlaceCounters::firstOrCreate(array(
 			'id' => $this->id
@@ -47,7 +50,7 @@ class Place extends Eloquent {
 
 
 	public static function all($columns = array()) {
-		$all = Place::with('counters', 'catchphrases')->get();
+		$all = Place::with('photo', 'counters', 'catchphrases')->get();
 		$all->each(function($c) {
 			// if ($c->idTime == null && $c->type != null) {
 			// 	$c->attributes['idTime'] = $c->type->idTime;

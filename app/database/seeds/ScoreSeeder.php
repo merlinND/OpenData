@@ -8,10 +8,14 @@ class ScoreSeeder extends Seeder {
 	{
 		$places = Place::all();
 		$places->each(function($p) {
-			$p->counters->display = rand(0, 50);
-			$p->counters->go = rand(0, 30);
-			$p->counters->skip = rand(0, 50);
-			$p->counters->save();
+			$counters = PlaceCounters::firstOrCreate(array(
+				'id' => $p->id
+			));
+
+			$counters->display = rand(0, 50);
+			$counters->go = rand(0, 30);
+			$counters->skip = rand(0, 50);
+			$counters->save();
 		});
 	}
 }

@@ -11,8 +11,6 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		DB::table('places')->delete();
-
 		$this->call('TypeTableSeeder');
 		$this->call('PlaceSeeder');
 		$this->call('ScoreSeeder');
