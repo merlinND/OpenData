@@ -14,7 +14,7 @@ class Place extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array();
+	protected $hidden = array('created_at', 'updated_at', 'idType', 'idTime');
 
 	public function type()
 	{
@@ -24,6 +24,14 @@ class Place extends Eloquent {
 	public function time()
 	{
 		return $this->hasOne('Time', 'id', 'idTime');
+	}
+
+	public function counters()
+	{
+		$counters = PlaceCounters::firstOrCreate(array(
+			'id' => $this->id
+		));
+		return $this->hasOne('PlaceCounters', 'id');
 	}
 
 	public function getTime() {
