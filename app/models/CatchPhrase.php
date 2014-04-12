@@ -1,4 +1,5 @@
 <?php
+
 class Catchphrase extends Eloquent {
 
 	/**
@@ -27,3 +28,5 @@ class Catchphrase extends Eloquent {
 		return trans($this->key);
 	}
 }
+
+?>
