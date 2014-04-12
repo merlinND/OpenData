@@ -1,7 +1,7 @@
 Tarte Tatin API
 ===============
 
-Le point d'accès à l'API est [tarte-tatin.fr/api/](tarte-tatin.fr/api/)
+Le point d'accès à l'API est [tartetat.in/api/](tartetat.in/api/)
 Les données sont toujours retournées au format JSON.
 
 # Fonctionnalités
@@ -52,11 +52,11 @@ Exemples :
 	GET /place?from=[<lat>,<long>]&time=<secondes>&distance<kilometres>
 	GET /place?from=[<lat>,<long>]&distance[<kilometres>,<kilometres>]
 
-## Récupérer une list de points d'intérêts selon des critères en excluant certains points d'intérêts
+## Récupérer une liste de points d'intérêts selon des critères en excluant certains points d'intérêts
 
 Comme précédemment, avec le paramètre supplémentaire :
 
-- `except` : liste des identitifiants des lieux à exclure
+- `except` : liste des identifiants des lieux à exclure
 
 Exemple :
 
