@@ -22,4 +22,8 @@ class Catchphrase extends Eloquent {
 	public function scopeFromPlace($query) {
 		return $query->where('table', '=', 'place');
 	}
+
+	public function toArray() {
+		return trans($this->key);
+	}
 }
