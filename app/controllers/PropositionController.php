@@ -4,6 +4,7 @@ class PropositionController extends Controller {
 
 	public function showPlace()
 	{
+		// Fetch data from the user
 		if (Session::has('latitude')) {
 			$latitude = Session::get('latitude');
 			$longitude = Session::get('longitude');
@@ -32,29 +33,38 @@ class PropositionController extends Controller {
 			}
 		}
 
-		if (!Session::has('exceptedPlaces'))
-			$url = '/api/place?from='.$latitude.','.$longitude.'&time=.'.$duration;
-		else
-			$url = '/api/place?from='.$latitude.','.$longitude.'&time=.'.$duration.'&except='.implode(",", Session::get("exceptedPlaces"));
+		$data = array(
+			'from' => '['.$latitude.','.$longitude.']',
+			'time' => 70000,
+			'limit' => 1,
+		);
 
-		// $curl = curl_init();
-		// curl_setopt_array($curl, array(
-		// 	CURLOPT_RETURNTRANSFER => 1,
-		// 	CURLOPT_URL => $url,
-		// ));
-		// $resp = curl_exec($curl);
-		// curl_close($curl);
+		// Add excepted places if we have some
+		if (Session::has('exceptedPlaces'))
+			$data['except'] =  '['.implode(",", Session::get("exceptedPlaces")).']';
+
+		// Call our API
+		$request = Request::create('api/place', 'GET', $data);
+		Request::replace($request->input());
+		$resp = Route::dispatch($request)->getOriginalContent();
+		$respJSON = json_decode($resp);
+		
+		if (!empty($respJSON))
+			$respJSON = $respJSON[0];
+		else
+			return Response::view('errors.missing', array(), 404);
+		
 
 		// TODO, change $placeID
-		$placeID = 42;
+		$placeID = $respJSON->id;
 		Session::put('previousPlaceID', $placeID);
 
 		// Expected data
 		$data = array(
 			'backgroundURL' => 'https://farm3.staticflickr.com/2211/2495499504_78eed392dd_b.jpg',
 			'catchphrase' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio augue, adipiscing sit amet ante vel, varius euismod odio.',
-			'name' => 'Fake Name',
-			'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio augue, adipiscing sit amet ante vel, varius euismod odio. Sed tincidunt et diam vitae placerat. Nam laoreet elementum elit, adipiscing sagittis dolor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed id erat congue, fermentum quam eget, dignissim turpis. Nam dignissim faucibus sagittis. Proin vitae dapibus sapien.',
+			'name' => $respJSON->name,
+			'description' => $respJSON->description,
 			'duration' => '2h20',
 			'placeID' => $placeID,
 		);
