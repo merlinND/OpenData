@@ -163,6 +163,9 @@
  	height: 100%;
  	margin: 0 auto;
  	width:100%;
+ 	position: relative;
+	z-index: 4;
+
  	
  	.photo {
  		height: 100%;
@@ -179,6 +182,18 @@
  	.container-fluid {
  		padding: 0;
  		height: 100%;
+
+ 		.arrow {
+ 			background:url(/assets/img/arrow.png);
+ 			width: 64px;
+ 			height: 64px;
+    		position: fixed;
+    		left: 80%;
+    		bottom: 15px;
+    		margin-left: -32px;
+    		cursor: pointer;
+    		z-index: 3;
+		}
 
  		#catchphrase {
  			color: white;
@@ -199,6 +214,9 @@
  .description-container {
  	background: $mainColor;
  	padding: 20px 30px;
+ 	position: relative;
+	z-index: 5;
+
 
  	.container-fluid {
 
@@ -239,6 +257,33 @@
  			@include border-radius(100%);
  		}
  	}
+ }
+
+ .container-fluid.footer {
+ 	background: $mainColor;
+ 	height: 200px;
+ 	padding-top: 30px;
+ 	position: relative;
+	z-index: 5;
+
+ 	.row {
+ 		margin: 0;
+
+	 	img {
+	 		height: 100px;
+	 	}
+
+	 	img.opendata {
+	 		float:left;
+	 		padding-left: 50px;
+	 	}
+
+	 	img.departement {
+	 		float:right;
+	 		padding-right: 50px;
+	 	}
+ 	}
+
  }
 
  @-webkit-keyframes hue {

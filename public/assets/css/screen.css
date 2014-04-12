@@ -247,8 +247,10 @@ body.homepage {
   height: 100%;
   margin: 0 auto;
   width: 100%;
+  position: relative;
+  z-index: 4;
 }
-/* line 167, ../../../sass/screen.scss */
+/* line 170, ../../../sass/screen.scss */
 .photo-container .photo {
   height: 100%;
   width: 100%;
@@ -262,12 +264,24 @@ body.homepage {
   filter: blur(3px);
   position: absolute;
 }
-/* line 179, ../../../sass/screen.scss */
+/* line 182, ../../../sass/screen.scss */
 .photo-container .container-fluid {
   padding: 0;
   height: 100%;
 }
-/* line 183, ../../../sass/screen.scss */
+/* line 186, ../../../sass/screen.scss */
+.photo-container .container-fluid .arrow {
+  background: url(/assets/img/arrow.png);
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  left: 80%;
+  bottom: 15px;
+  margin-left: -32px;
+  cursor: pointer;
+  z-index: 3;
+}
+/* line 198, ../../../sass/screen.scss */
 .photo-container .container-fluid #catchphrase {
   color: white;
   position: absolute;
@@ -281,12 +295,14 @@ body.homepage {
   text-shadow: 0px -1px 10px black;
 }
 
-/* line 199, ../../../sass/screen.scss */
+/* line 214, ../../../sass/screen.scss */
 .description-container {
   background: #f1c40f;
   padding: 20px 30px;
+  position: relative;
+  z-index: 5;
 }
-/* line 205, ../../../sass/screen.scss */
+/* line 223, ../../../sass/screen.scss */
 .description-container .container-fluid h1 {
   font-family: 'EB Garamond', serif;
   color: #f1c40f;
@@ -295,21 +311,21 @@ body.homepage {
   display: inline;
   float: left;
 }
-/* line 214, ../../../sass/screen.scss */
+/* line 232, ../../../sass/screen.scss */
 .description-container .container-fluid .time-travel {
   font-style: italic;
   float: right;
   margin-top: 0.7em;
   font-size: 1.2em;
 }
-/* line 221, ../../../sass/screen.scss */
+/* line 239, ../../../sass/screen.scss */
 .description-container .container-fluid #description {
   color: #927608;
   margin: 20px 0;
   line-height: 1.5em;
   text-align: justify;
 }
-/* line 228, ../../../sass/screen.scss */
+/* line 246, ../../../sass/screen.scss */
 .description-container .container-fluid button#letsGo {
   background: #2980b9;
   border: 0;
@@ -328,13 +344,40 @@ body.homepage {
   border-radius: 100%;
 }
 
+/* line 262, ../../../sass/screen.scss */
+.container-fluid.footer {
+  background: #f1c40f;
+  height: 200px;
+  padding-top: 30px;
+  position: relative;
+  z-index: 5;
+}
+/* line 269, ../../../sass/screen.scss */
+.container-fluid.footer .row {
+  margin: 0;
+}
+/* line 272, ../../../sass/screen.scss */
+.container-fluid.footer .row img {
+  height: 100px;
+}
+/* line 276, ../../../sass/screen.scss */
+.container-fluid.footer .row img.opendata {
+  float: left;
+  padding-left: 50px;
+}
+/* line 281, ../../../sass/screen.scss */
+.container-fluid.footer .row img.departement {
+  float: right;
+  padding-right: 50px;
+}
+
 @-webkit-keyframes hue {
-  /* line 245, ../../../sass/screen.scss */
+  /* line 290, ../../../sass/screen.scss */
   from {
     -webkit-filter: hue-rotate(0deg);
   }
 
-  /* line 249, ../../../sass/screen.scss */
+  /* line 294, ../../../sass/screen.scss */
   to {
     -webkit-filter: hue-rotate(-360deg);
   }

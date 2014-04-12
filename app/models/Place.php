@@ -41,11 +41,11 @@ class Place extends Eloquent {
 	 * or we fallback to the cathphrases of its Type
 	 */
 	public function catchphrases() {
-		$cathphrases = CatchPhrase::fromPlace()->where('idTable', '=', $this->id)->get();
+		$cathphrases = Catchphrase::fromPlace()->where('idTable', '=', $this->id)->get();
 		if (count($cathphrases) < 1) {
-			$cathphrases = CatchPhrase::fromType()->where('idTable', '=', $this->type->id);
+			$cathphrases = Catchphrase::fromType()->where('idTable', '=', $this->type->id);
 		}
-		return $this->hasMany('CatchPhrase', 'idTable');
+		return $this->hasMany('Catchphrase', 'idTable');
 	}
 
 

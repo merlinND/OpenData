@@ -139,13 +139,21 @@ class OpenData76Seeder extends PlaceSeeder {
 		return $this->baseURLNominatim.implode('&', $data);
 	}
 
-	private function getLocalisationFromNominatim($request)
+	private function getLocalisationFromNominatim($requestURL)
 	{
-		$response = current(jyggen\Curl::get($request));
-		$data = current(json_decode($response->getContent()));
+		$request = new jyggen\Curl\Request($requestURL);
+		$request->setOption(CURLOPT_CONNECTTIMEOUT, 1);
+		$request->setOption(CURLOPT_TIMEOUT, 2);
+		$request->execute();
 
-		if (!empty($data)) {
-			
+		if ($request->isSuccessful()) {
+
+			$response = $request->getResponse();
+			$data = current(json_decode($response->getContent()));
+
+			if (empty($data))
+				return false;
+				
 			return array(
 				'lat' => $data->lat,
 				'lon' => $data->lon,
