@@ -47,17 +47,15 @@ Route::group(array('prefix' => '/api'), function() {
 		return "TODO: retourner l'endroit avec id $place_id.";
 	});
 
-	Route::get('/place/test', function() {
-		$r = array();
-		$r[] = Input::get('q');
-		$r[] = json_decode(Input::get('q'));
-		return var_dump($r);
+	Route::get('/place/random', function() {
+		return ApiController::getRandomPlace();
 	});
 
+
 	Route::get('/place/', function() {
-		// No parameter => random place
+		// No parameter => top ranked
 		if(count(Input::all()) < 1)
-			return ApiController::getRandomPlace();
+			return ApiController::getTopRankedPlace();
 
 		// No valid parameter => 404 error
 		$params = array();
