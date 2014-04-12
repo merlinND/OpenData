@@ -12,20 +12,24 @@ class FlickrSeeder extends Seeder {
 		foreach ($places as $place)
 		{	
 			$methodSearch = Flickering::callMethod('photos.search', array('lat' => $place->latitude, 'lon' => $place->longitude));
-			echo "Fetching result for photos...\n";
+			// echo "Fetching result for photos...\n";
 			$data = $methodSearch->getResults('photo');
+			// echo "1\n";
 
 			if (!empty($data))
 			{
+				// echo "data not empty\n";
 				$infos = $this->getPhotoInformations($data[0]['id']);
 
-				if (!empty($infos))
+				if (!empty($infos)) {
+					// echo "data not empty\n";
 					Photo::create(array(
 					'url' => $infos['source'],
 					'idPlace' => $place->id,
 					'width' => $infos['width'],
 					'height' => $infos['height']
 					));
+				}
 			}
 		}
 	}
