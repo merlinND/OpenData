@@ -56,7 +56,6 @@ class PropositionController extends Controller {
 			return Response::view('errors.missing', array(), 404);
 		
 
-		// TODO, change $placeID
 		$placeID = $respJSON->id;
 		Session::put('previousPlaceID', $placeID);
 
@@ -71,10 +70,15 @@ class PropositionController extends Controller {
 			$description = "Default description";
 		else
 			$description = $respJSON->description;
-
-		$backgroundURL = $respJSON->photo->url;
-		if (empty($backgroundURL))
+		
+		// Check if we have a background or not
+		if (!property_exists($respJSON, "photo") OR $respJSON->photo == null)
 			$backgroundURL = 'https://farm9.staticflickr.com/8458/8055958618_5fb048a6b7_b.jpg';
+		else {
+			$backgroundURL = $respJSON->photo->url;
+			if (empty($backgroundURL))
+				$backgroundURL = 'https://farm9.staticflickr.com/8458/8055958618_5fb048a6b7_b.jpg';
+		}
 
 		// Expected data
 		$data = array(
