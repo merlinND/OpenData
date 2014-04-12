@@ -30,8 +30,11 @@ Route::get('/home', array('as' => 'home', function()
 Route::post('/proposition', array('as' => 'proposition', function()
 {
 	$data = array(
-		'backgroundURL' => '/assets/img/home.jpg',
-		'catchphrase' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio augue, adipiscing sit amet ante vel, varius euismod odio.'
+		'backgroundURL' => 'https://farm3.staticflickr.com/2211/2495499504_78eed392dd_b.jpg',
+		'catchphrase' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio augue, adipiscing sit amet ante vel, varius euismod odio.',
+		'name' => 'Fake Name',
+		'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio augue, adipiscing sit amet ante vel, varius euismod odio. Sed tincidunt et diam vitae placerat. Nam laoreet elementum elit, adipiscing sagittis dolor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed id erat congue, fermentum quam eget, dignissim turpis. Nam dignissim faucibus sagittis. Proin vitae dapibus sapien.',
+		'duration' => '2h20'
 	);
 
 	return View::make('proposition/home', $data);
