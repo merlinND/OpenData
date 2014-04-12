@@ -2,7 +2,7 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|Raleway);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300|EB+Garamond|Raleway);
 /* line 17, ../../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -68,12 +68,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 16, ../../../sass/screen.scss */
+/* line 18, ../../../sass/screen.scss */
 .no-padding {
   padding: 0;
 }
 
-/* line 20, ../../../sass/screen.scss */
+/* line 22, ../../../sass/screen.scss */
 body, html {
   height: 100%;
   font-family: 'Raleway', sans-serif;
@@ -81,7 +81,7 @@ body, html {
   font-size: 15px;
 }
 
-/* line 27, ../../../sass/screen.scss */
+/* line 29, ../../../sass/screen.scss */
 body.homepage {
   background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent;
   -webkit-background-size: cover;
@@ -90,84 +90,93 @@ body.homepage {
   background-size: cover;
 }
 
-/* line 35, ../../../sass/screen.scss */
+/* line 37, ../../../sass/screen.scss */
 .navbar {
-  background: #c0392b;
+  background: #f1c40f;
 }
-/* line 38, ../../../sass/screen.scss */
+/* line 40, ../../../sass/screen.scss */
 .navbar .navbar-brand {
   margin-top: -15px;
 }
 
-/* line 43, ../../../sass/screen.scss */
+/* line 45, ../../../sass/screen.scss */
+.clear {
+  clear: both;
+}
+
+/* line 49, ../../../sass/screen.scss */
 .homepage-photo-container {
   height: 100%;
   margin: 0 auto;
   width: 100%;
 }
-/* line 48, ../../../sass/screen.scss */
+/* line 54, ../../../sass/screen.scss */
 .homepage-photo-container .photo-homepage {
   background: none;
   height: 100%;
 }
-/* line 52, ../../../sass/screen.scss */
+/* line 58, ../../../sass/screen.scss */
 .homepage-photo-container .photo-homepage .container-fluid {
   height: 100%;
+  padding: 0;
 }
-/* line 55, ../../../sass/screen.scss */
+/* line 62, ../../../sass/screen.scss */
 .homepage-photo-container .photo-homepage .container-fluid .title {
   height: 20%;
 }
-/* line 58, ../../../sass/screen.scss */
+/* line 65, ../../../sass/screen.scss */
 .homepage-photo-container .photo-homepage .container-fluid .title h1 {
   padding-top: 10%;
   font-size: 4em;
   text-align: center;
+  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 60s infinite linear;
 }
-/* line 65, ../../../sass/screen.scss */
-.homepage-photo-container .photo-homepage .container-fluid .row {
+/* line 75, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form {
+  height: 80%;
+}
+/* line 78, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row {
   height: 40%;
   width: 100%;
+  margin: 0;
+  padding-top: 15%;
+  display: block;
 }
-/* line 69, ../../../sass/screen.scss */
-.homepage-photo-container .photo-homepage .container-fluid .row .col-xs-6 {
-  padding: 15% 15%;
+/* line 85, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 {
   cursor: pointer;
-}
-/* line 73, ../../../sass/screen.scss */
-.homepage-photo-container .photo-homepage .container-fluid .row .col-xs-6 span.time {
   text-align: center;
-  font-size: 1.2em;
-  color: white;
-  text-shadow: 2px 1px 1px black;
+  min-height: 100%;
 }
-/* line 79, ../../../sass/screen.scss */
-.homepage-photo-container .photo-homepage .container-fluid .row .col-xs-6 span.time.two-hours {
-  margin-left: 15px;
-}
-/* line 87, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer {
+/* line 90, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer {
   height: 100px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
+  display: inline-block;
 }
-/* line 91, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer .pieBackground {
-  background-color: #c0392b;
+/* line 95, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer .pieBackground {
+  background-color: transparent;
   position: absolute;
   width: 100px;
   height: 100px;
+  border: 1px solid white;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   -ms-border-radius: 50px;
   -o-border-radius: 50px;
   border-radius: 50px;
 }
-/* line 99, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer .pieBackground.full {
+/* line 104, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer .pieBackground.full {
   background-color: white;
 }
-/* line 103, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer .pie {
+/* line 108, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer .pie {
   position: absolute;
   width: 100px;
   height: 100px;
@@ -179,8 +188,8 @@ body.homepage {
   border-radius: 50px;
   clip: rect(0px, 50px, 100px, 0px);
 }
-/* line 112, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer .hold {
+/* line 117, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer .hold {
   position: absolute;
   width: 100px;
   height: 100px;
@@ -191,38 +200,49 @@ body.homepage {
   border-radius: 50px;
   clip: rect(0px, 100px, 100px, 50px);
 }
-/* line 120, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer #thirty-minutes .pie {
+/* line 125, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer #thirty-minutes .pie {
   -webkit-transform: rotate(15deg);
   -moz-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   -o-transform: rotate(15deg);
   transform: rotate(15deg);
 }
-/* line 124, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer #two-hours .pie {
+/* line 129, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer #two-hours .pie {
   -webkit-transform: rotate(60deg);
   -moz-transform: rotate(60deg);
   -ms-transform: rotate(60deg);
   -o-transform: rotate(60deg);
   transform: rotate(60deg);
 }
-/* line 128, ../../../sass/screen.scss */
-.homepage-photo-container .pieContainer #six-hours .pie {
+/* line 133, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 .pieContainer #six-hours .pie {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+/* line 138, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 span.time {
+  text-align: center;
+  font-size: 1.3em;
+  color: white;
+  text-shadow: 2px 1px 1px black;
+}
+/* line 144, ../../../sass/screen.scss */
+.homepage-photo-container .photo-homepage .container-fluid form .row .col-xs-6 span.time.two-hours {
+  margin-left: 15px;
+}
 
-/* line 134, ../../../sass/screen.scss */
+/* line 154, ../../../sass/screen.scss */
 .photo-container {
   height: 100%;
   margin: 0 auto;
   width: 100%;
 }
-/* line 139, ../../../sass/screen.scss */
+/* line 159, ../../../sass/screen.scss */
 .photo-container .photo {
   height: 100%;
   width: 100%;
@@ -236,21 +256,80 @@ body.homepage {
   filter: blur(3px);
   position: absolute;
 }
-/* line 151, ../../../sass/screen.scss */
+/* line 171, ../../../sass/screen.scss */
 .photo-container .container-fluid {
   padding: 0;
   height: 100%;
 }
-/* line 155, ../../../sass/screen.scss */
+/* line 175, ../../../sass/screen.scss */
 .photo-container .container-fluid #catchphrase {
   color: white;
   position: absolute;
   z-index: 500;
-  font-size: 2.6em;
+  font-size: 2.5em;
   padding: 10px 20px;
   line-height: 1.5em;
   width: 70%;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
   text-shadow: 0px -1px 10px black;
+}
+
+/* line 191, ../../../sass/screen.scss */
+.description-container {
+  background: #f1c40f;
+  padding: 20px 30px;
+}
+/* line 197, ../../../sass/screen.scss */
+.description-container .container-fluid h1 {
+  font-family: 'EB Garamond', serif;
+  color: #f1c40f;
+  font-size: 2.5em;
+  color: white;
+  display: inline;
+  float: left;
+}
+/* line 206, ../../../sass/screen.scss */
+.description-container .container-fluid .time-travel {
+  font-style: italic;
+  float: right;
+  margin-top: 0.7em;
+  font-size: 1.2em;
+}
+/* line 213, ../../../sass/screen.scss */
+.description-container .container-fluid #description {
+  color: #927608;
+  margin: 20px 0;
+  line-height: 1.5em;
+  text-align: justify;
+}
+/* line 220, ../../../sass/screen.scss */
+.description-container .container-fluid button#letsGo {
+  background: #2980b9;
+  border: 0;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1.2em;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+  border: 3px solid #a9d1ec;
+  display: block;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+}
+
+@-webkit-keyframes hue {
+  /* line 237, ../../../sass/screen.scss */
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  /* line 241, ../../../sass/screen.scss */
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
 }
