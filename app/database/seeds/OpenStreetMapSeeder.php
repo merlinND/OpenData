@@ -129,7 +129,7 @@ class OpenStreetMapSeeder extends PlaceSeeder {
 		$ch = curl_init($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt ($ch, CURLOPT_USERAGENT, "tartetat.in bot"); 
-		curl_setopt ($ch, CURLOPT_TIMEOUT, 1000); 
+		curl_setopt ($ch, CURLOPT_TIMEOUT, 3); 
 		$c = curl_exec($ch);
 
 		$json = json_decode($c);
