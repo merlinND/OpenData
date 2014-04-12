@@ -15,6 +15,7 @@ class CreateCatchphrasesTable extends Migration {
 		Schema::create('catchphrases', function(Blueprint $table)
 		{
 			$table->increments('id');
+			// References a translation key
 			$table->string('key', 255);
 			$table->string('table', 255);
 			$table->integer('idTable');
