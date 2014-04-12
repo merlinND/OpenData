@@ -14,7 +14,7 @@ class Place extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array();
+	protected $hidden = array('created_at', 'updated_at', 'idType', 'idTime');
 
 	public function type()
 	{
@@ -26,6 +26,14 @@ class Place extends Eloquent {
 		return $this->hasOne('Time', 'id', 'idTime');
 	}
 
+	public function counters()
+	{
+		$counters = PlaceCounters::firstOrCreate(array(
+			'id' => $this->id
+		));
+		return $this->hasOne('PlaceCounters', 'id');
+	}
+
 	public function getTime() {
 
 		if ($this->idTime == null)
@@ -33,4 +41,30 @@ class Place extends Eloquent {
 		else
 			return $this->time;
 	}
+
+	/**
+	 * Add 1 to the view counter
+	 * Call each time this Place is displayed.
+	 */
+	public function bumpViews() {
+		$this->counters->display++;
+		$this->counters->save();
+	}
+	/**
+	 * Add 1 to the go counter
+	 * Call each time this Place is selected by a user.
+	 */
+	public function bumpGo() {
+		$this->counters->go++;
+		$this->counters->save();
+	}
+	/**
+	 * Add 1 to the skip counter
+	 * Call each time a user decides not to go to this place.
+	 */
+	public function bumpSkip() {
+		$this->counters->skip++;
+		$this->counters->save();
+	}
+
 }

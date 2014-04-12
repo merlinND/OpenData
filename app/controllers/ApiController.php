@@ -13,18 +13,55 @@ class ApiController extends Controller {
 		'limit'
 	);
 
+	/**
+	 * @param Eloquent\Collection
+	 * @param Position
+	 * @return Eloquent\Collection Sorted by euclidian distance to <from>. The distance is also cached in the instance.
+	 */
+	public static function sortByDistance($collection, $from) {
+		return $collection->sortBy(function($c) use ($from) {
+			$to = new Position($c->latitude, $c->longitude);
+			$distance = $from->distanceTo($to);
+
+			$c->distance = $distance;
+
+			return $distance;
+		});
+	}
+
+	// TODO : score => ranking
+	// TODO : update score on actions (go, skip, etc)
+	public static function getTopRankedPlace() {
+		$candidates = Place::all();
+
+		$maxScore = 0;
+		$top = $candidates->first();
+		$candidates = $candidates->map(function($c) use (&$top, &$maxScore) {
+			$score = $c->counters->getScore();
+			if ($score > $maxScore) {
+				$top = $c;
+				$maxScore = $score;
+			}
+		});
+
+		return $top;
+	}
+
 	public static function getRandomPlace() {
 		return Place::all()->random();
 	}
 
 	/**
 	 * @param from Associative array {'lat'=>, 'long'=>}
-	 * @param limit
-	 * @return Eloquent\Collection of the <limit> closest places to <from>
+	 * @param limit A hard limit on the number of results (determined by the server, not the client)
+	 * @return Eloquent\Collection of the <limit> closest places to <from>, ordered by euclidian distance
 	 */
 	public static function getAllPlaces($from, $limit = self::MAX_RESULTS) {
-		// TODO: choose the closest
-		return Place::all()->slice(0, $limit);
+		
+		$candidates = Place::all();
+		$candidates = self::sortByDistance($candidates, $from);
+
+		return $candidates->slice(0, $limit);
 	}
 
 	/**
@@ -46,8 +83,6 @@ class ApiController extends Controller {
 		foreach ($filters as $filter => $value) {
 			$candidates = self::applyFilter($filter, $value, $candidates, $from);
 		}
-		
-		// TODO : score => ranking
 
 		// Finally, apply 'limit' filter
 		if ($limit > 0)
@@ -123,6 +158,9 @@ class ApiController extends Controller {
 			$to = new Position($c->latitude, $c->longitude);
 			$distance = $from->distanceTo($to);
 			$time = Position::getEstimatedTravelTime($distance);
+
+			// Cache the travel time in this object
+			$c->travelTime = $time;
 
 			// Maximum time for *one* travel
 			// (still need time to enjoy the place, and come back)
