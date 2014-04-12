@@ -95,15 +95,18 @@ class OpenStreetMapSeeder extends PlaceSeeder {
 		{
 			$nominatim = $this->getAdressFromNominatim($element);
 
-			Place::create(array(
-				'name'      => $element->tags->name,
-				'latitude'  => $element->lat,
-				'longitude' => $element->lon,
-				'zipcode'   => $nominatim->address->postcode,
-				'city'      => $nominatim->address->city,
-				'idType'    => $this->getIdType($element),
-				'description' => $this->getWikipediaDescription($element->tags->name),
-			));
+			if (property_exists($nominatim, 'address') AND property_exists($nominatim->address, 'postcode') AND property_exists($nominatim->address, 'city')) {
+
+				Place::create(array(
+					'name'      => $element->tags->name,
+					'latitude'  => $element->lat,
+					'longitude' => $element->lon,
+					'zipcode'   => $nominatim->address->postcode,
+					'city'      => $nominatim->address->city,
+					'idType'    => $this->getIdType($element),
+					'description' => $this->getWikipediaDescription($element->tags->name),
+				));
+			}
 		}
 	}
 
