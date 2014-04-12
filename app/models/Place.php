@@ -15,6 +15,7 @@ class Place extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array('created_at', 'updated_at', 'idType', 'idTime', 'type');
+	protected $fillable = array('description');
 
 	public function type()
 	{
