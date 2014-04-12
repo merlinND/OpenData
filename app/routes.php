@@ -17,10 +17,22 @@ Route::get('/', function()
 });
 
 // Launchpage
-Route::get('/home', function()
+// You can change the URL, but keep the name of the route!
+Route::get('/home', array('as' => 'home', function()
 {
 	return View::make('homepage/home');
-});
+}));
+
+// After the launchpage
+// You can change the URL, but keep the name of the route!
+// You will have these values: duration (minutes) / longitude / latitude.
+// We'll need a controller here. Get the values with Input::get('duration') etc.
+Route::post('/proposition', array('as' => 'proposition', function()
+{
+	$data = array('backgroundURL' => '/assets/img/home.jpg');
+
+	return View::make('proposition/home', $data);
+}));
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +45,6 @@ Route::get('/home', function()
 Route::pattern('place_id', '[0-9]+');
 
 Route::group(array('prefix' => '/api'), function() {
-
-	Route::get('/hello', 'ApiController@helloApi');
 
 	//Route::model('place_id', 'Place');
 	//Route::get('/place/{place_id}', function(Place $place) {
@@ -55,6 +65,7 @@ Route::group(array('prefix' => '/api'), function() {
 				$valid = true;
 			}
 		}
+
 		// The <from> parameter is required
 		if (count($params) < 1 || !Input::has('from')) {
 			App::abort(404);
@@ -63,6 +74,9 @@ Route::group(array('prefix' => '/api'), function() {
 
 		// Paramètre(s) => recherche filtrée
 		$coords = json_decode(Input::get('from'));
-		return ApiController::getPlaces($coords, $params);
+
+		$results = ApiController::getPlaces($coords, $params);
+
+		return $results->flatten();
 	});
 });
