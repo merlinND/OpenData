@@ -27,7 +27,7 @@
  }
 
  body.homepage { 
- 	background: url(/assets/img/home_blur.jpg) no-repeat center center fixed transparent; 
+ 	background: url(/assets/img/home2.jpg) no-repeat center center fixed transparent; 
  	-webkit-background-size: cover;
  	-moz-background-size: cover;
  	-o-background-size: cover;
@@ -71,9 +71,17 @@
  					-webkit-text-fill-color: transparent;
  					-webkit-animation: hue 60s infinite linear;
  				}
+
+ 				// Logo
+ 				img {
+					display: block;
+ 					height: 120%;
+					margin: 0 auto;
+ 				}
  			}
+
  			form {
- 			height: 80%;
+ 				height: 80%;
 
  				.row {
  					height: 40%;

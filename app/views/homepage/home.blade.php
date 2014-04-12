@@ -2,7 +2,8 @@
 <div class="photo-homepage">
 	<div class="container-fluid">
 		<div class="title">
-			<h1>@lang('home.pageTitle')</h1>
+			<!-- <h1>@lang('home.pageTitle')</h1> -->
+			<img src="{{ URL::asset('assets/img/logo.png') }}" alt="Tarte Tat.in">
 		</div>
 
 		{{ Form::open(array('route' => 'proposition')) }}
