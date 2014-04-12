@@ -67,7 +67,7 @@ class PropositionController extends Controller {
 
 		// Fetch the description
 		if (!property_exists($respJSON, "description") OR $respJSON->description == null)
-			$description = "Default description";
+			$description = "";
 		else
 			$description = $respJSON->description;
 		

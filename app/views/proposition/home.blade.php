@@ -18,9 +18,9 @@
 
 		<div class="actions">
 			<div class="col-left">
-				<button id="letsGo">
-					{{{Lang::get('proposition.letsGo')}}}
-				</button>
+				<a href="https://www.openstreetmap.org/search?query={{{$latitude}}}%2C{{{$longitude}}}#map=15/{{{$latitude}}}/{{{$longitude}}}">
+						<button id="letsGo">{{{Lang::get('proposition.letsGo')}}}</button>
+				</a>
 			</div>
 			<div class="col-right">
 				<a href="?except={{{$placeID}}}">{{{Lang::get('proposition.somethingElse')}}}</a>
