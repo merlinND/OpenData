@@ -109,3 +109,21 @@ Route::group(array('prefix' => '/api'), function() {
 		return $results;
 	});
 });
+
+
+// Routes for Flickr
+Route::get('flickr/auth', function() {
+    Flickering::handshake();
+    return Flickering::getOpauth();
+});
+
+Route::any('flickr/oauth_callback', function() {
+    Flickering::handshake();
+    if(Request::getMethod() == 'POST'){
+        Flickering::getOpauthCallback();
+        return 'Authenticated!';
+    }else{
+        Flickering::getOpauth();
+        return 'Being redirected..';
+    }
+});

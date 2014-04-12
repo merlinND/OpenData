@@ -13,5 +13,6 @@ class Photo extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array();
+	protected $hidden = array('id', 'idPlace', 'created_at', 'updated_at');
+	protected $fillable = array('idPlace', 'url', 'width', 'height');
 }
