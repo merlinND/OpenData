@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"jyggen/curl": "3.0.*",
-		"jens-na/osrm-api-client": "dev-master"
+		"jens-na/osrm-api-client": "dev-master",
+		"anahkiasen/flickering": "*"
 	},
 	"autoload": {
 		"classmap": [

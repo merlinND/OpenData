@@ -20,8 +20,9 @@ class CreatePlacesTable extends Migration {
 			$table->string('description', 255);
 
 			// First look : OSRM gives "mapped_coordinate" as a pair of float
-			$table->decimal('latitude', 15, 15);
-			$table->decimal('longitude', 15, 15);
+			// 8 , 6 -> 2 numbers before the decimal and 6 after
+			$table->decimal('latitude', 8, 6);
+			$table->decimal('longitude', 8, 6);
 
 			// The Code of the location (Example : 76100)
 			$table->integer('zipcode');

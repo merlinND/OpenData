@@ -16,8 +16,7 @@
 		</div>
 
 		<button id="letsGo">{{{Lang::get('proposition.letsGo')}}}</button>
-
-		<a href="#">{{{Lang::get('proposition.somethingElse')}}}</a>
+		<a href="?except={{{$placeID}}}">{{{Lang::get('proposition.somethingElse')}}}</a>
 	</div>	
 </div>
 @include('proposition/footer')

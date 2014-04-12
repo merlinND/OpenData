@@ -27,7 +27,7 @@ Route::get('/home', array('as' => 'home', function()
 // You can change the URL, but keep the name of the route!
 // You will have these values: duration (minutes) / longitude / latitude.
 // We'll need a controller here. Get the values with Input::get('duration') etc.
-Route::post('/proposition', array('as' => 'proposition', 'uses' => 'PropositionController@showPlace'));
+Route::match(array('GET', 'POST'), '/proposition', array('as' => 'proposition', 'uses' => 'PropositionController@showPlace'));
 
 /*
 |--------------------------------------------------------------------------
