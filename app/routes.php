@@ -52,6 +52,13 @@ Route::group(array('prefix' => '/api'), function() {
 		return "TODO: retourner l'endroit avec id $place_id.";
 	});
 
+	Route::get('/place/test', function() {
+		$r = array();
+		$r[] = Input::get('q');
+		$r[] = json_decode(Input::get('q'));
+		return var_dump($r);
+	});
+
 	Route::get('/place/', function() {
 		// No parameter => random place
 		if(count(Input::all()) < 1)
@@ -62,20 +69,37 @@ Route::group(array('prefix' => '/api'), function() {
 		foreach (ApiController::$supportedParameters as $key) {
 			if (Input::has($key) && strlen(Input::get($key)) > 0) {
 				$params[$key] = Input::get($key);
-				$valid = true;
 			}
 		}
 
 		// The <from> parameter is required
-		if (count($params) < 1 || !Input::has('from')) {
+		$coords = json_decode(Input::get('from'));
+		if (count($params) < 1 || !Input::has('from') || count($coords) != 2) {
 			App::abort(404);
 			return Response::view('errors.missing', array(), 404);
 		}
+		$from = Utils::position($coords[0], $coords[1]);
 
-		// Paramètre(s) => recherche filtrée
-		$coords = json_decode(Input::get('from'));
+		// Interpreting the meaning of the <distance> parameter
+		// Nothing specified => talking about max distance
+		if (isset($params['distance'])) {
+			$distances = json_decode(Input::get('distance'));
+			if(count($distances) > 1) {
+				$params['distance'] = array(
+					'min' => $distances[0],
+					'max' => $distances[1]
+				);
+			}
+			else {
+				$params['distance'] = array(
+					'min' => 0,
+					'max' => $params['distance']
+				);
+			}
+		}
 
-		$results = ApiController::getPlaces($coords, $params);
+		// Parameter(s) => filtered search
+		$results = ApiController::getPlaces($from, $params);
 
 		return $results->flatten();
 	});

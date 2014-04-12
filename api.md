@@ -16,16 +16,17 @@ Exemple :
 
 Critères disponibles :
 
-- `from` : lieu de départ (position actuelle de l'utilisateur), sous forme de chaîne `{lat:0000, long:0000}`
+- `from` : lieu de départ (position actuelle de l'utilisateur), sous forme de chaîne `[-10.2,0.0048]`
 - `time` : temps libre disponible. Cela limitera les lieux retournés à la fois sur leur distance à `from` (temps de déplacement), mais également sur le temps nécessaire à visiter ce lieu (par exemple, un musée est long à visiter tandis qu'un parc peut s'apprécier quel que soit le temps disponible).
-- `distance` : distance maximale du lieu à `from`, en kilomètres
+- `distance` : distance maximale du lieu à `from`, en kilomètres. Il peut également être spécifié sour la forme [min, max].
 - `limit` : nombre maximal de lieux à recevoir
 
 Seul le paramètre `from` est obligatoire.
 
-Exemple :
+Exemples :
 
-	GET /place?from={lat:<lat>,long:<long>}&time=<secondes>&distance<kilometres>
+	GET /place?from=[<lat>,<long>]&time=<secondes>&distance<kilometres>
+	GET /place?from=[<lat>,<long>]&distance[<kilometres>,<kilometres>]
 
 ## Récupérer une list de points d'intérêts selon des critères en excluant certains points d'intérêts
 
@@ -35,4 +36,4 @@ Comme précédemment, avec le paramètre supplémentaire :
 
 Exemple :
 
-	GET /place/?from={lat:<lat>,long:<long>}&except=[1,3,5,7]
+	GET /place/?from=[<lat>,<long>]&except=[1,3,5,7]
