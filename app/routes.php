@@ -29,7 +29,10 @@ Route::get('/home', array('as' => 'home', function()
 // We'll need a controller here. Get the values with Input::get('duration') etc.
 Route::post('/proposition', array('as' => 'proposition', function()
 {
-	$data = array('backgroundURL' => '/assets/img/home.jpg');
+	$data = array(
+		'backgroundURL' => '/assets/img/home.jpg',
+		'catchphrase' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio augue, adipiscing sit amet ante vel, varius euismod odio.'
+	);
 
 	return View::make('proposition/home', $data);
 }));

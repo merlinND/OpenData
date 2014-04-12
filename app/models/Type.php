@@ -14,4 +14,15 @@ class Type extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array();
+
+	public function places()
+	{
+		return $this->hasMany('Place', 'idType');
+	}
+
+	public function time()
+	{
+		return $this->hasOne('Time', 'idTime');
+	}
+
 }
