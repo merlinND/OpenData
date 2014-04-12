@@ -62,8 +62,11 @@ class PropositionController extends Controller {
 		// Fetch the catchphrase
 		if (!property_exists($respJSON, "catchphrases") OR count($respJSON->catchphrases) == 0)
 			$catchphrase = trans('catchphrases.default');
-		else
-			$catchphrase = trans($respJSON->catchphrases[rand(0, count($respJSON->catchphrases) - 1)]);
+		else {
+			$choice = $respJSON->catchphrases[rand(0, count($respJSON->catchphrases) - 1)];
+			$arr = json_decode($resp, true);
+			$catchphrase = Lang::get($choice, $arr[0]);
+		}
 
 		// Fetch the description
 		if (!property_exists($respJSON, "description") OR $respJSON->description == null)
