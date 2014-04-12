@@ -29,7 +29,6 @@ class ApiController extends Controller {
 		});
 	}
 
-	// TODO : score => ranking
 	// TODO : update score on actions (go, skip, etc)
 	public static function getTopRankedPlace() {
 		$candidates = Place::all();
@@ -37,7 +36,7 @@ class ApiController extends Controller {
 		$maxScore = 0;
 		$top = $candidates->first();
 		$candidates = $candidates->map(function($c) use (&$top, &$maxScore) {
-			$score = $c->counters->getScore();
+			$score = $c->counters->score;
 			if ($score > $maxScore) {
 				$top = $c;
 				$maxScore = $score;
