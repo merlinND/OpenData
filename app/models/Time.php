@@ -14,4 +14,5 @@ class Time extends Eloquent {
 	 * @var array
 	 */
 	protected $hidden = array();
+
 }
