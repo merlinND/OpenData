@@ -11,3 +11,4 @@ composer.lock
 .DS_Store
 
 app/config/database.php
+app/config/packages/anahkiasen/flickering/*
